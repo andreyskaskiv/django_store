@@ -6,8 +6,6 @@
 {% endblock %}
 
 
-{#{% include 'nav/right_bar.html' %}#}
-
 {% block content %}
 
     <!-- Page Content -->
@@ -15,7 +13,7 @@
 
         <div class="row">
 
-            {% include 'nav/right_bar.html' %}
+            {% include 'nav/categories_right_bar.html' %}
 
             <!-- /.col-lg-3 -->
 
@@ -29,7 +27,7 @@
                         <div class="card h-100">
                             <a href="#">
                                 <img class="card-img-top"
-                                     src="{{ product.image }}"
+                                     src="{{ product.image.url }}"
                                      alt="">
                             </a>
                             <div class="card-body">
