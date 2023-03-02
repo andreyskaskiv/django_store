@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Store</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/vendor/css/index.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+{% include 'nav/nav-top-bar.html' %}
+
+<!-- Page Content -->
+<section>
+    <!--    <div class="alert alert-light text-center" role="alert">-->
+    <!--        Информационное сообщение-->
+    <!--    </div>-->
+
+    {% block content %}
+    {% endblock content %}
+
+</section>
+
+
+{% include 'nav/footer.html' %}
+
+</body>
+
+</html>
