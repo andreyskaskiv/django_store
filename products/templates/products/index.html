@@ -1,21 +1,33 @@
-{% extends '_base.html' %}
+{% extends 'products/_base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="{% static 'vendor/css/index.css' %}" rel="stylesheet">
+{% endblock %}
+
+
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <h1 class="mt-5">Store</h1>
-                <p>
-                    New looks and top brands on the Store.
-                </p>
-                <p>
-                    Free worldwide shipping! Outlet: up to -70% Own brand. -20% for new customers.
-                </p>
-                <button id="start-purchase-btn" type="button" class="btn btn-lg">
-                    <a id="start-purchase-link" href="products.html">
-                        Start shopping
-                    </a>
-                </button>
+    <section>
+        <!--    <div class="alert alert-light text-center" role="alert">-->
+        <!--        Информационное сообщение-->
+        <!--    </div>-->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h1 class="mt-5">Store</h1>
+                    <p>
+                        New looks and top brands on the Store.
+                    </p>
+                    <p>
+                        Free worldwide shipping! Outlet: up to -70% Own brand. -20% for new customers.
+                    </p>
+                    <button id="start-purchase-btn" type="button" class="btn btn-lg">
+                        <a id="start-purchase-link" href="{% url 'products' %}">
+                            Start shopping
+                        </a>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 {% endblock content %}
