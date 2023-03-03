@@ -1,20 +1,19 @@
-from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth, messages
+from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 
-from users.models import User
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 
 
 def login(request):
     if request.method == 'POST':
-        form = UserLoginForm(data=request.POST)     # Audit
+        form = UserLoginForm(data=request.POST)  # Audit
         if form.is_valid():
             username = request.POST['username']
             password = request.POST['password']
             user = auth.authenticate(username=username, password=password)  # Authentication
             if user:
-                auth.login(request, user)   # Authorisation
+                auth.login(request, user)  # Authorisation
                 messages.success(request, 'You have successfully logged in!')
                 return HttpResponseRedirect(reverse('index'))
 
@@ -50,3 +49,9 @@ def profile(request):
     context = {'title': 'Store - Profile',
                'form': form}
     return render(request, 'users/profile.html', context)
+
+
+def logout(request):
+    auth.logout(request)
+    messages.success(request, 'Bye...')
+    return HttpResponseRedirect(reverse('index'))
