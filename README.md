@@ -12,15 +12,19 @@
 
 
 
-~~~shell
-$ pip install -r requirements.txt
-~~~
+1. Install packages:
+   ```bash
+   pip install --upgrade pip
+   pip install -r requirements.txt
+   ```
+   
+2. Run project dependencies, migrations, fill the database with the fixture data etc.:
+   ```bash
+   python manage.py migrate
+   python manage.py loaddata <path_to_fixture_files>
+   python manage.py runserver 
+   ```
 
-
-## Run server
-~~~shell
-python manage.py runserver
-~~~
 
 
 
