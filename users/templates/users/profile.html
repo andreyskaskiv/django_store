@@ -8,6 +8,7 @@
 {% block content %}
 
     <div class="container">
+
         <div class="row">
             <div class="col-lg-7">
                 <h4 class="mt-3 mb-3">Profile</h4>
@@ -20,6 +21,9 @@
                                 {% endif %}"
                          class="img-thumbnail">
                 </div>
+
+            {% include 'users/messages.html' %}
+
                 <form action="{% url 'users:profile' %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
 
