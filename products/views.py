@@ -1,5 +1,7 @@
 from django.shortcuts import render
+
 from products.models import Product, ProductCategory
+
 
 def index(request):
     context = {'title': 'Store'}
