@@ -24,7 +24,7 @@
             <div class="col-lg-9">
 
                 <div class="row">
-                    {% for product in products %}
+                    {% for product in object_list %}
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="card h-100">
                                 <a href="#">
@@ -50,8 +50,9 @@
                     {% endfor %}
                 </div>
 
-
-                {% include 'nav/pagination.html' %}
+                {% if is_paginated %}
+                    {% include 'nav/pagination.html' %}
+                {% endif %}
 
 
             </div>
