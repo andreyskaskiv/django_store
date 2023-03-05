@@ -1,6 +1,5 @@
-from django.contrib import auth, messages
-from django.shortcuts import render, HttpResponseRedirect
-from django.urls import reverse, reverse_lazy
+from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView
 
 from products.models import Basket
@@ -8,22 +7,12 @@ from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 from users.models import User
 
 
-def login(request):
-    if request.method == 'POST':
-        form = UserLoginForm(data=request.POST)  # Audit
-        if form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
-            user = auth.authenticate(username=username, password=password)  # Authentication
-            if user:
-                auth.login(request, user)  # Authorisation
-                messages.success(request, 'You have successfully logged in!')
-                return HttpResponseRedirect(reverse('index'))
+class UserLoginView(LoginView):
+    template_name = 'users/login.html'
+    form_class = UserLoginForm
 
-    else:
-        form = UserLoginForm()
-    context = {'form': form}
-    return render(request, 'users/login.html', context)
+
+# messages.success(request, 'You have successfully logged in!')
 
 
 class UserRegistrationView(CreateView):
@@ -44,7 +33,6 @@ class UserProfileView(UpdateView):
     model = User
     form_class = UserProfileForm
     template_name = 'users/profile.html'
-    title = 'Store - Profile'
 
     def get_success_url(self):
         return reverse_lazy('users:profile', args=(self.object.id,))
@@ -55,11 +43,6 @@ class UserProfileView(UpdateView):
         context['baskets'] = Basket.objects.filter(user=self.object)
         return context
 
-
 # messages.success(request, 'Data updated!')
 
-
-def logout(request):
-    auth.logout(request)
-    messages.success(request, 'Bye...')
-    return HttpResponseRedirect(reverse('index'))
+# messages.success(request, 'Bye...')
