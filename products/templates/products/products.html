@@ -13,11 +13,9 @@
 
         <div class="row">
 
-
             <div class="col-lg-3">
                 {% include 'nav/categories_right_bar.html' %}
             </div>
-
 
             <!-- /.col-lg-3 -->
 
@@ -34,7 +32,7 @@
                                 </a>
                                 <div class="card-body">
                                     <h4 class="card-title">
-                                        <a href="#">{{ product.name }}</a>
+                                        <a href="{% url 'products:product_details' product.id %}">{{ product.name }}</a>
                                     </h4>
                                     <h5>{{ product.price }} usdt</h5>
                                     <p class="card-text">{{ product.description }}</p>
@@ -54,7 +52,6 @@
                     {% include 'nav/pagination.html' %}
                 {% endif %}
 
-
             </div>
         </div>
     </div>
@@ -62,8 +59,6 @@
 
     <!-- Footer -->
     {% include 'products/footer.html' %}
-
-
 
 {% endblock content %}
 

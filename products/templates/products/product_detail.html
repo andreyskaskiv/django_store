@@ -1,0 +1,53 @@
+{% extends 'products/_base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="{% static 'vendor/css/products.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+
+    <!-- Page Content -->
+    <div class="container" style="margin-top: 20px; margin-bottom: 50px">
+
+        <div class="row">
+
+            <div class="col-lg-3">
+                {% include 'nav/categories_right_bar.html' %}
+            </div>
+
+            <!-- /.col-lg-3 -->
+
+            <div class="col-lg-9">
+
+                <div class="card mt-9 my-9">
+                    <img class="card-img-top img-fluid" src="{{ object.image.url }}" alt="">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ object.name }}</h3>
+                        <h4>{{ product.price }} usdt</h4>
+                        <p class="card-text">{{ product.description }}</p>
+                    </div>
+                </div>
+
+                <div class="card-footer text-center">
+                    <a class="btn btn-outline-success"
+                       href="{% url 'products:basket_add'  product.id %}">
+                        Add to cart
+                    </a>
+                </div>
+
+                {% if is_paginated %}
+                    {% include 'nav/pagination.html' %}
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    {% include 'products/footer.html' %}
+
+{% endblock content %}
+
