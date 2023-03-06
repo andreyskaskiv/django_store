@@ -9,7 +9,7 @@ app_name = 'users'
 urlpatterns = [
     path('login/', UserLoginView.as_view(), name='login'),  # ../users/login
     path('register/', UserRegistrationView.as_view(), name='register'),  # ../users/register
-    path('profile/<int:pk>/', login_required(UserProfileView.as_view()), name='profile'),  # ../users/profile
+    path('profile/<int:pk>/', login_required(UserProfileView.as_view()), name='profile'),  # ../users/profile/1
     path('logout/', LogoutView.as_view(), name='logout'),
 
 ]
