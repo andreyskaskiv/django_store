@@ -1,4 +1,5 @@
 from django.contrib.auth.views import LoginView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView
 
@@ -7,19 +8,18 @@ from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 from users.models import User
 
 
-class UserLoginView(LoginView):
+class UserLoginView(SuccessMessageMixin, LoginView):
     template_name = 'users/login.html'
     form_class = UserLoginForm
+    success_message = 'You have successfully logged in!'
 
 
-# messages.success(request, 'You have successfully logged in!')
-
-
-class UserRegistrationView(CreateView):
+class UserRegistrationView(SuccessMessageMixin, CreateView):
     model = User
     form_class = UserRegistrationForm
     template_name = 'users/register.html'
     success_url = reverse_lazy('users:login')
+    success_message = 'You have successfully registered!'
 
     def get_context_data(self, **kwargs):
         context = super(UserRegistrationView, self).get_context_data()
@@ -27,12 +27,11 @@ class UserRegistrationView(CreateView):
         return context
 
 
-# messages.success(request, 'You have successfully registered!')
-
-class UserProfileView(UpdateView):
+class UserProfileView(SuccessMessageMixin, UpdateView):
     model = User
     form_class = UserProfileForm
     template_name = 'users/profile.html'
+    success_message = 'Data updated!'
 
     def get_success_url(self):
         return reverse_lazy('users:profile', args=(self.object.id,))
@@ -42,7 +41,3 @@ class UserProfileView(UpdateView):
         context['title'] = 'Store - Profile'
         context['baskets'] = Basket.objects.filter(user=self.object)
         return context
-
-# messages.success(request, 'Data updated!')
-
-# messages.success(request, 'Bye...')
