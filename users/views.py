@@ -14,7 +14,7 @@ class UserLoginView(TitleMixin, SuccessMessageMixin, LoginView):
     template_name = 'users/login.html'
     form_class = UserLoginForm
     success_message = 'You have successfully logged in!'
-    title = 'Login'
+    title = 'Store - Login'
 
 
 class UserRegistrationView(TitleMixin, SuccessMessageMixin, CreateView):
