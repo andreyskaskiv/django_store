@@ -50,7 +50,7 @@ class ProductsListViewTestCase(TestCase):
         self.assertTemplateUsed(response, 'products/products.html')
 
 
-class ProductDetailView(TestCase):
+class ProductDetailViewTestCase(TestCase):
     fixtures = ['categories.json', 'goods.json']
 
     def test_01_view(self):
