@@ -10,7 +10,7 @@ from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 from users.models import User, EmailVerification
 
 
-class UserLoginView(TitleMixin, SuccessMessageMixin, LoginView, EmailVerification):
+class UserLoginView(TitleMixin, SuccessMessageMixin, LoginView):
     template_name = 'users/login.html'
     form_class = UserLoginForm
     success_message = 'You have successfully logged in!'
