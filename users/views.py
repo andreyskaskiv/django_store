@@ -3,11 +3,13 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import TemplateView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, FormView
 
 from common.views import TitleMixin
-from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
+from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm, GenerateDataForm
 from users.models import User, EmailVerification
+
+from tools.db_manager import main as write_to_db_test_data
 
 
 class UserLoginView(TitleMixin, SuccessMessageMixin, LoginView):
@@ -55,3 +57,17 @@ class EmailVerificationView(TitleMixin, TemplateView):
             return super(EmailVerificationView, self).get(request, *args, **kwargs)
         else:
             return HttpResponseRedirect(reverse('index'))
+
+
+class IndexView(FormView):
+    template_name = 'users/service.html'
+    form_class = GenerateDataForm
+    success_url = reverse_lazy('users:service')
+
+    def form_valid(self, form):
+        quantity = form.cleaned_data['quantity']
+        print(quantity)
+
+        write_to_db_test_data()
+
+        return super().form_valid(form)

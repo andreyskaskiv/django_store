@@ -1,5 +1,6 @@
 import uuid
 from datetime import timedelta
+
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.utils.timezone import now
@@ -54,3 +55,12 @@ class UserProfileForm(UserChangeForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'image', 'username', 'email')
+
+
+class GenerateDataForm(forms.Form):
+    quantity = forms.ChoiceField(
+        label='Quantity',
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-control py-1'}),
+        choices=[('10', '10'), ('15', '15'), ('20', '20')],
+    )
