@@ -17,6 +17,7 @@ class ProductCategory(models.Model):
 
 
 class Product(models.Model):
+    id = models.IntegerField(primary_key=True, auto_created=False)   # disable auto increment
     name = models.CharField(max_length=256)
     description = models.TextField()
     price = models.DecimalField(max_digits=8, decimal_places=2)

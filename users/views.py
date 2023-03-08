@@ -59,14 +59,16 @@ class EmailVerificationView(TitleMixin, TemplateView):
             return HttpResponseRedirect(reverse('index'))
 
 
-class IndexView(FormView):
+class DataGenerationView(TitleMixin, SuccessMessageMixin, FormView):
+    title = 'Store - Data generation'
     template_name = 'users/service.html'
     form_class = GenerateDataForm
     success_url = reverse_lazy('users:service')
+    success_message = 'Data updated!'
 
     def form_valid(self, form):
         quantity = form.cleaned_data['quantity']
-        print(quantity)
+        # add user profile generation
 
         write_to_db_test_data()
 
