@@ -4,6 +4,7 @@ from users.models import User
 
 
 class ProductCategory(models.Model):
+    id = models.IntegerField(primary_key=True, auto_created=False)   # disable auto increment
     name = models.CharField(max_length=128, unique=True)
     description = models.TextField(null=True, blank=True)
 

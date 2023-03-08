@@ -1,0 +1,434 @@
+[
+    {
+        "name": "Short Dress",
+        "description": "Short dress in woven fabric. Round neckline and opening at back of neck with a button. Yoke at back with concealed pleats, long sleeves, and narrow cuffs with ties. Side pockets. 100% polyester. Machine wash cold.",
+        "price": "24.99",
+        "quantity": 14,
+        "image": "products_images/90008-E.jpg",
+        "category": "Dress"
+    },
+    {
+        "name": "Patterned Slacks",
+        "description": "Ankle-length slacks in patterned stretch cotton satin. Regular waist with concealed hook-and-eye fastener and zip fly. Side pockets and tapered legs with slits at hems. 61% cotton, 36% polyester, 3% spandex. Machine wash...",
+        "price": "29.99",
+        "quantity": 6,
+        "image": "products_images/96436-A.jpg",
+        "category": "Slacks"
+    },
+    {
+        "name": "Short Chiffon Dress",
+        "description": "Short V-neck dress in plumeti chiffon. Gathers and small ruffle at shoulders, dropped shoulders, and long, wide sleeves with buttons at cuffs. Narrow, elasticized seam at waist and circle skirt with ruffled tiers. Lined. 100% polyester. Machine wash warm.",
+        "price": "49.99",
+        "quantity": 13,
+        "image": "products_images/93926-B.jpg",
+        "category": "Dress"
+    },
+    {
+        "name": "Off-the-shoulder Dress",
+        "description": "Short, fitted off-the-shoulder dress in stretch ribbed fabric. Short raglan sleeves, seam at waist with gently flared skirt. Unlined. 54% rayon, 44% nylon, 2% spandex. Machine wash warm.",
+        "price": "59.99",
+        "quantity": 8,
+        "image": "products_images/90882-B.jpg",
+        "category": "Dress"
+    },
+    {
+        "name": "V-neck Top",
+        "description": "Top in woven fabric with V-neck front and back. Narrow shoulder straps and decorative straps at back. 100% polyester. Machine wash cold.",
+        "price": "24.99",
+        "quantity": 14,
+        "image": "products_images/93756-C.jpg",
+        "category": "Top"
+    },
+    {
+        "name": "Short Chiffon Dress",
+        "description": "Short V-neck dress in plumeti chiffon. Gathers and small ruffle at shoulders, dropped shoulders, and long, wide sleeves with buttons at cuffs. Narrow, elasticized seam at waist and circle skirt with ruffled tiers. Lined. 100% polyester. Machine wash warm.",
+        "price": "49.99",
+        "quantity": 12,
+        "image": "products_images/93926-C.jpg",
+        "category": "Dress"
+    },
+    {
+        "name": "V-neck Top",
+        "description": "Top in woven fabric with V-neck front and back. Narrow shoulder straps and decorative straps at back. 100% polyester. Machine wash cold.",
+        "price": "24.99",
+        "quantity": 5,
+        "image": "products_images/93756-B.jpg",
+        "category": "Top"
+    },
+    {
+        "name": "V-neck Top",
+        "description": "Top in woven fabric with V-neck front and back. Narrow shoulder straps and decorative straps at back. 100% polyester. Machine wash cold.",
+        "price": "24.99",
+        "quantity": 8,
+        "image": "products_images/93756-D.jpg",
+        "category": "Top"
+    },
+    {
+        "name": "Short Lace Dress",
+        "description": "Short, straight-cut dress in lace. Opening at back with concealed button at back of neck. Round neck, padded shoulders, and 3/4-length sleeves. Lined. 51% cotton, 25% nylon, 24% rayon. Machine wash cold.",
+        "price": "59.99",
+        "quantity": 6,
+        "image": "products_images/96643-A.jpg",
+        "category": "Dress"
+    },
+    {
+        "name": "Fitted Dress",
+        "description": "Fitted dress in thick jersey with a V-neck, long sleeves, and cut-out section at back with button at back of neck. Lined at top. 60% rayon, 35% nylon, 5% spandex. Machine wash warm.",
+        "price": "34.99",
+        "quantity": 15,
+        "image": "products_images/94766-A.jpg",
+        "category": "Dress"
+    },
+    {
+        "name": "V-neck Jumpsuit",
+        "description": "Jumpsuit in woven fabric with a V-neck and short butterfly sleeves. Concealed zip at back, seam at waist, and slightly slimmer, gently flared legs with creases. 92% polyester, 8% spandex. Machine wash warm.",
+        "price": "69.99",
+        "quantity": 10,
+        "image": "products_images/91696-C.jpg",
+        "category": "Jumpsuit"
+    },
+    {
+        "name": "Chiffon Dress",
+        "description": "Short dress in crinkled chiffon with a V-neck front and back. Horizontal ties at back of neck, pleats at top, and concealed side zip. Long, semi-sheer sleeves, gathered seam at waist, and flared skirt. Lined. 100% polyester. Machine wash cold.",
+        "price": "54.99",
+        "quantity": 6,
+        "image": "products_images/93745-A.jpg",
+        "category": "Dress"
+    },
+    {
+        "name": "Skinny High Waist Jeans",
+        "description": "5-pocket jeans in washed stretch denim with distressed details. High waist, zip fly with button, and skinny legs. 99% cotton, 1% spandex.",
+        "price": "39.99",
+        "quantity": 6,
+        "image": "products_images/65763-E.jpg",
+        "category": "Jeans"
+    },
+    {
+        "name": "Super Skinny High Jeans",
+        "description": "Jeans in washed superstretch denim with a zip fly and button. Mock pockets at front, regular pockets at back, and super-skinny legs. High waist. 78% cotton, 20% polyester, 2% spandex. Machine wash...",
+        "price": "19.99",
+        "quantity": 11,
+        "image": "products_images/70745-D.jpg",
+        "category": "Jeans"
+    },
+    {
+        "name": "Oversized Denim Jacket",
+        "description": "Oversized denim jacket with smooth metal buttons at front and at cuffs. Collar, chest pockets with flap and button, and side-seam pockets. Adjustable tab at back with buttons. 100% cotton. Machine wash cold.",
+        "price": "19.99",
+        "quantity": 15,
+        "image": "products_images/94706-A.jpg",
+        "category": "Jacket"
+    },
+    {
+        "name": "Short Sweatshirt",
+        "description": "Short sweatshirt with long sleeves and ribbing at neckline, cuffs, and hem. 57% cotton, 43% polyester. Machine wash cold.",
+        "price": "24.99",
+        "quantity": 7,
+        "image": "products_images/96230-B.jpg",
+        "category": "Sweatshirt"
+    },
+    {
+        "name": "Long-sleeved Jersey Top",
+        "description": "CONSCIOUS. Fitted, long-sleeved top in stretch jersey made from organic cotton with a round neckline. 92% cotton, 3% spandex, 3% rayon, 2% polyester.",
+        "price": "12.99",
+        "quantity": 6,
+        "image": "products_images/73840-F.jpg",
+        "category": "Top"
+    },
+    {
+        "name": "Skinny High Waist Jeans",
+        "description": "5-pocket jeans in washed stretch denim with distressed details. High waist, zip fly with button, and skinny legs. 70% cotton, 28% polyester, 2% spandex. Machine wash...",
+        "price": "39.99",
+        "quantity": 11,
+        "image": "products_images/65763-A.jpg",
+        "category": "Jeans"
+    },
+    {
+        "name": "Short Sweatshirt",
+        "description": "Short sweatshirt with long sleeves and ribbing at neckline, cuffs, and hem. 57% cotton, 43% polyester. Machine wash cold.",
+        "price": "24.99",
+        "quantity": 13,
+        "image": "products_images/96230-A.jpg",
+        "category": "Sweatshirt"
+    },
+    {
+        "name": "Long-sleeved Jersey Top",
+        "description": "CONSCIOUS. Fitted, long-sleeved top in stretch jersey made from organic cotton with a round neckline. 92% cotton, 3% spandex, 3% rayon, 2% polyester.",
+        "price": "12.99",
+        "quantity": 6,
+        "image": "products_images/73840-P.jpg",
+        "category": "Top"
+    },
+    {
+        "name": "Long-sleeved Jersey Top",
+        "description": "CONSCIOUS. Fitted, long-sleeved top in stretch jersey made from organic cotton with a round neckline. 92% cotton, 3% spandex, 3% rayon, 2% polyester.",
+        "price": "12.99",
+        "quantity": 9,
+        "image": "products_images/73840-Q.jpg",
+        "category": "Top"
+    },
+    {
+        "name": "Jersey Dress",
+        "description": "Fitted dress in jersey with long, straight sleeves. Unlined. 72% polyester, 23% rayon, 5% spandex. Machine wash...",
+        "price": "19.99",
+        "quantity": 9,
+        "image": "products_images/96113-C.jpg",
+        "category": "Dress"
+    },
+    {
+        "name": "Short Sweatshirt",
+        "description": "Short sweatshirt with long sleeves and ribbing at neckline, cuffs, and hem. 57% cotton, 43% polyester. Machine wash cold.",
+        "price": "24.99",
+        "quantity": 12,
+        "image": "products_images/96230-C.jpg",
+        "category": "Sweatshirt"
+    },
+    {
+        "name": "Crinkled Flounced Blouse",
+        "description": "Blouse in airy, crinkled fabric with a printed pattern. Small stand-up collar, concealed buttons at front, and flounces at front. Long sleeves with buttons at cuffs. Rounded hem. 100% polyester. Machine wash cold.",
+        "price": "24.99",
+        "quantity": 13,
+        "image": "products_images/00959-A.jpg",
+        "category": "Others"
+    },
+    {
+        "name": "Bib Overall Dress",
+        "description": "Short bib overall dress in twill. Shoulder straps tied together with metal eyelets at top. Chest pocket, front pockets, and back pockets. Unlined. 58% cotton, 42% lyocell. Machine wash cold.",
+        "price": "29.99",
+        "quantity": 12,
+        "image": "products_images/94323-B.jpg",
+        "category": "Dress"
+    },
+    {
+        "name": "Loose-knit Sweater",
+        "description": "Soft, loose-knit sweater with a V-neck, long raglan sleeves, and roll edges at cuffs and hem. Longer at back. 100% acrylic. Machine wash warm.",
+        "price": "17.99",
+        "quantity": 11,
+        "image": "products_images/71342-J.jpg",
+        "category": "Others"
+    },
+    {
+        "name": "Skinny Regular Jeans",
+        "description": "5-pocket jeans in washed superstretch denim with heavily distressed details. Regular waist, zip fly, and slim legs. 82% cotton, 17% polyester, 1% spandex.",
+        "price": "29.99",
+        "quantity": 7,
+        "image": "products_images/94453-B.jpg",
+        "category": "Jeans"
+    },
+    {
+        "name": "Henley-style Top",
+        "description": "Fitted top in soft cotton jersey with a scoop neckline, buttons at front, and long sleeves. 68% cotton, 27% polyester, 5% spandex.",
+        "price": "12.99",
+        "quantity": 13,
+        "image": "products_images/34975-K.jpg",
+        "category": "Top"
+    },
+    {
+        "name": "Joggers",
+        "description": "Joggers in soft sweatshirt fabric with an elasticized drawstring waistband, side pockets, and elasticized hems. Soft, brushed inside. 70% cotton, 30% polyester.",
+        "price": "17.99",
+        "quantity": 9,
+        "image": "products_images/59851-A.jpg",
+        "category": "Joggers"
+    },
+    {
+        "name": "Skirt with Lacing",
+        "description": "Short skirt in soft twill with eyelets and lacing at front. Concealed zip at back with button. Unlined. 56% cotton, 44% lyocell. Machine wash cold.",
+        "price": "34.99",
+        "quantity": 12,
+        "image": "products_images/93811-A.jpg",
+        "category": "Skirt"
+    },
+    {
+        "name": "Top with Tie",
+        "description": "Short-sleeved top in soft jersey. Metal eyelets at front, contrasting tie, and contrasting ribbing at neck and cuffs. 100% cotton. Machine wash cold.",
+        "price": "17.99",
+        "quantity": 13,
+        "image": "products_images/94967-A.jpg",
+        "category": "Top"
+    },
+    {
+        "name": "Joggers",
+        "description": "Joggers in woven fabric with a slight rustle. Wide, elasticized drawstring waistband, side pockets, and a back pocket with zip. Wide jersey ribbing at hems. 54% polyester, 43% cotton, 3% spandex. Machine wash...",
+        "price": "34.99",
+        "quantity": 10,
+        "image": "products_images/92905-A.jpg",
+        "category": "Joggers"
+    },
+    {
+        "name": "Chiffon Dress with Flounce",
+        "description": "Calf-length dress in crinkled chiffon with a printed pattern. V-neck, sewn wrapover at front, and short sleeves. Flounced seam at waist, concealed zip at one side, and asymmetrical hem. Half lined. 100% polyester. Machine wash cold.",
+        "price": "49.99",
+        "quantity": 13,
+        "image": "products_images/97504-A.jpg",
+        "category": "Dress"
+    },
+    {
+        "name": "Skirt with Lacing",
+        "description": "Short skirt in soft twill with eyelets and lacing at front. Concealed zip at back with button. Unlined. 56% cotton, 44% lyocell. Machine wash cold.",
+        "price": "34.99",
+        "quantity": 10,
+        "image": "products_images/93811-B.jpg",
+        "category": "Skirt"
+    },
+    {
+        "name": "V-neck Top",
+        "description": "V-neck top in airy jersey with buttons at top and 3/4-length sleeves. Rounded hem with slits at sides. Slightly longer at back. 100% polyester. Machine wash cold.",
+        "price": "9.99",
+        "quantity": 15,
+        "image": "products_images/95168-D.jpg",
+        "category": "Top"
+    },
+    {
+        "name": "Hooded Jacket",
+        "description": "Sweatshirt jacket with a lined drawstring hood. Zip at front, side pockets, and ribbing at cuffs and hem. 58% cotton, 42% polyester. Machine wash warm.",
+        "price": "29.99",
+        "quantity": 13,
+        "image": "products_images/52378-D.jpg",
+        "category": "Jacket"
+    },
+    {
+        "name": "Hooded Top",
+        "description": "Wide-cut sweatshirt with a jersey-lined drawstring hood. Dropped shoulders, kangaroo pocket, and ribbing at cuffs and hem. 70% cotton, 25% polyester, 5% rayon. Machine wash warm.",
+        "price": "29.99",
+        "quantity": 9,
+        "image": "products_images/60135-A.jpg",
+        "category": "Top"
+    },
+    {
+        "name": "Lyocell-blend Blouse",
+        "description": "Straight-cut blouse in woven fabric with Tencel\u00ae lyocell content. Opening at back of neck with button and wide sleeves with drawstring. 66% rayon, 19% polyester, 15% lyocell. Machine wash...",
+        "price": "34.99",
+        "quantity": 9,
+        "image": "products_images/91865-A.jpg",
+        "category": "Others"
+    },
+    {
+        "name": "Bib Overall Dress",
+        "description": "Short bib overall dress in twill. Shoulder straps tied together with metal eyelets at top. Chest pocket, front pockets, and back pockets. Unlined. 58% cotton, 42% lyocell. Machine wash cold.",
+        "price": "29.99",
+        "quantity": 11,
+        "image": "products_images/94323-A.jpg",
+        "category": "Dress"
+    },
+    {
+        "name": "Wide-leg Pants",
+        "description": "Pants in cr\u00eaped, woven fabric with contrasting side stripes. Zip fly with concealed hook-and-eye fastener. Side pockets, back pockets, and straight legs with sewn cuffs. 100% polyester. Machine wash warm.",
+        "price": "34.99",
+        "quantity": 11,
+        "image": "products_images/92942-B.jpg",
+        "category": "Others"
+    },
+    {
+        "name": "Ankle-length Slim-fit Pants",
+        "description": "5-pocket, ankle-length pants in stretch twill. Regular waist, zip fly with button, and slim, straight legs. 74% cotton, 25% polyester, 1% spandex. Machine wash...",
+        "price": "24.99",
+        "quantity": 11,
+        "image": "products_images/93270-A.jpg",
+        "category": "Others"
+    },
+    {
+        "name": "Short Sweatshirt",
+        "description": "Short sweatshirt with long sleeves and ribbing at neckline, cuffs, and hem. 83% cotton, 15% polyester, 2% rayon.",
+        "price": "9.99",
+        "quantity": 11,
+        "image": "products_images/96230-D.jpg",
+        "category": "Sweatshirt"
+    },
+    {
+        "name": "V-neck Blouse",
+        "description": "V-neck blouse in woven viscose fabric with buttons at top and 3/4-length sleeves. Rounded hem with short slits at sides. Slightly longer at back. 100% rayon. Machine wash cold.",
+        "price": "17.99",
+        "quantity": 6,
+        "image": "products_images/97571-B.jpg",
+        "category": "Others"
+    },
+    {
+        "name": "Short Skirt",
+        "description": "Short skirt in a woven modal blend with contrasting grosgrain trim. Concealed side zip and an attached belt at front with D-rings. Unlined. 72% modal, 28% polyester. Machine wash cold.",
+        "price": "24.99",
+        "quantity": 10,
+        "image": "products_images/92740-A.jpg",
+        "category": "Skirt"
+    },
+    {
+        "name": "Mesh T-shirt",
+        "description": "Long T-shirt in mesh with a V-neck. Yoke, dropped shoulders, and sleeves with \u00b4contrasting grosgrain trim. 100% polyester. Machine wash warm.",
+        "price": "17.99",
+        "quantity": 6,
+        "image": "products_images/94984-A.jpg",
+        "category": "Others"
+    },
+    {
+        "name": "Blouse with Embroidery",
+        "description": "Wide-cut blouse in woven cotton fabric with embroidery. Rounded neckline, partially concealed buttons at front, and long, wide balloon sleeves with embroidery and cuffs. 100% cotton. Machine wash cold.",
+        "price": "59.99",
+        "quantity": 13,
+        "image": "products_images/96236-C.jpg",
+        "category": "Others"
+    },
+    {
+        "name": "Wide-cut Cotton Top",
+        "description": "Straight-cut top in thicker cotton jersey with decorative seams and stitching. Rounded shoulders and short sleeves. 96% cotton, 4% spandex. Machine wash warm.",
+        "price": "34.99",
+        "quantity": 13,
+        "image": "products_images/99663-A.jpg",
+        "category": "Top"
+    },
+    {
+        "name": "Pleated Skirt",
+        "description": "Calf-length skirt in pleated, cr\u00eaped fabric with an elasticized waistband. Lined. 100% polyester. Machine wash cold.",
+        "price": "54.99",
+        "quantity": 9,
+        "image": "products_images/00268-B.jpg",
+        "category": "Skirt"
+    },
+    {
+        "name": "Coat",
+        "description": "Long coat in woven fabric with viscose content. Collar, concealed buttons at front, and tie belt at waist. Dropped shoulders, wide sleeves, and wide cuffs with buttons. Open chest pockets, side-seam pockets, and high slits at sides. Unlined. 66% polyester, 32% rayon, 2% spandex. Machine wash...",
+        "price": "69.99",
+        "quantity": 15,
+        "image": "products_images/98209-A.jpg",
+        "category": "Others"
+    },
+    {
+        "name": "Wide-leg Pants",
+        "description": "Wide-cut pants in soft, washed denim with a high waist, concealed hook-and-eye fastener, and zip fly. Pleats at top, side pockets, welt back pockets, and wide, straight-cut legs with creases at front and sewn cuffs at hems. 100% cotton. Machine wash cold.",
+        "price": "49.99",
+        "quantity": 9,
+        "image": "products_images/93158-A.jpg",
+        "category": "Others"
+    },
+    {
+        "name": "Top",
+        "description": "Top in soft, stretch viscose jersey. Wide neckline, long dolman sleeves, and visible seam front and back. 94% rayon, 6% spandex. Machine wash warm.",
+        "price": "29.99",
+        "quantity": 8,
+        "image": "products_images/00948-B.jpg",
+        "category": "Top"
+    },
+    {
+        "name": "Knit Mohair-blend Sweater",
+        "description": "PREMIUM QUALITY. Wide-fitting knit sweater in a mohair blend. Small, ribbed stand-up collar and long sleeves with ribbed cuffs. 32% nylon, 32% wool, 32% mohair, 4% spandex. Hand wash...",
+        "price": "69.99",
+        "quantity": 10,
+        "image": "products_images/94321-B.jpg",
+        "category": "Others"
+    },
+    {
+        "name": "Dress",
+        "description": "Calf-length dress in thick woven fabric with a collar. Button placket, flap chest pockets, and heavily dropped shoulders. Wide, tapered sleeves with buttons at cuffs, removable tie belt, and slits at sides. 63% polyester, 32% rayon, 5% spandex. Machine wash...",
+        "price": "69.99",
+        "quantity": 13,
+        "image": "products_images/98086-A.jpg",
+        "category": "Dress"
+    },
+    {
+        "name": "T-shirt with Embroidery",
+        "description": "T-shirt in cotton jersey with embroidered text. 100% cotton.",
+        "price": "29.99",
+        "quantity": 14,
+        "image": "products_images/01007-C.jpg",
+        "category": "Others"
+    }
+]
