@@ -1,51 +1,95 @@
+{% load comment_filter %}
+{% load static %}
+
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <section class="content-item" id="comments">
     <div class="container ">
         <div class="row">
             <div class="container">
 
-                <form>
-                    <h3 class="pull-left">New Comment</h3>
-                    <button class="btn btn-info pull-right" type="submit">Add comment <i class="fas fa-comments"></i>
-                    </button>
-                    <fieldset>
-                        <div class="container">
-                            <div class="">
-                                <textarea class="form-control" id="message" placeholder="Your message" required=""></textarea>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
+                <div class="form-outline mb-4" id="comments">
+                    <form method="post">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <label for="{{ form.username.id_for_label }}" class="form-label">
+                                <strong><i>{{ field.label }}</i></strong>
+                            </label>
+                            {{ field }}
+                        {% endfor %}
+                        <button class="btn btn-info" type="submit">Add comment <i class="fas fa-comments"></i></button>
 
-                <h3>4 Comments</h3>
-
-                <!-- COMMENT 1 - START -->
-                <div class="media">
-                    <a class="pull-left" href="#"><img class="media-object"
-                                                       src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""></a>
-
-                    <div class="media-body">
-                        <h4 class="media-heading">John Doe</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem
-                            ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-
-                        <ul class="list-unstyled list-inline media-detail pull-left" style="display: flex;">
-                            <li><i class="fa fa-calendar"></i>27/02/2014</li>
-                            <li><i class="fa fa-thumbs-up"></i>13</li>
-                        </ul>
-
-                        <ul class="list-unstyled list-inline media-detail pull-right" style="display: flex;">
-                            <li class=""><a href="">Like</a></li>
-                            <li class=""><a href="">Reply</a></li>
-                        </ul>
-
-                    </div>
+                    </form>
                 </div>
-                <!-- COMMENT 1 - END -->
 
 
+                <h3>{{ product.comments.count }} Comments</h3>
+
+                {% if product.comments.count %}
+                    {% for comment in product.comments.all %}
+                        <div class="media" id="commentLike{{ comment.id }}">
+                            <a class="pull-left" href="#"><img class="media-object"
+                                                               src="{% if user.image %} {{ user.image.url }}
+                                                                {% else %}
+                                                                    {% static 'vendor/img/users/default_avatar.jpg' %}
+                                                                {% endif %}" alt=""></a>
+
+                            {% if comment.active %}
+                                <div class="media-body">
+                                    <h4 class="media-heading">@{{ comment.author }}</h4>
+                                    <p>{{ comment.body }}</p>
+
+                                    <ul class="list-unstyled list-inline media-detail pull-left" style="display: flex;">
+                                        <li><i class="fa fa-calendar"></i>added {{ comment.created|timesince }} ago</li>
+                                    </ul>
+
+
+                                    {% if comment|is_liked_by:request.user %}
+                                        <ul class="list-unstyled list-inline media-detail pull-right">
+                                            <li class="">
+                                                <a href="{% url 'products:comment_like' comment_id=comment.id %}">Unlike
+                                                    <i class="fas fa-thumbs-up mx-2 fa-xs"
+                                                       style="margin-top: -0.16rem;"></i>
+                                                    {{ comment.likes_count }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    {% else %}
+                                        <ul class="list-unstyled list-inline media-detail pull-right">
+                                            <li class="">
+                                                <a href="{% url 'products:comment_like' comment_id=comment.id %}">Unlike
+                                                    <i class="far fa-thumbs-up mx-2 fa-xs text-black"
+                                                       style="margin-top: -0.16rem;"></i>
+                                                    {{ comment.likes_count }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    {% endif %}
+                                </div>
+                            {% else %}
+                                <p class="text-danger"><i>Comment was disabled</i></p>
+                            {% endif %}
+
+                            <!-- is_superuser -->
+                            {% if request.user.is_superuser %}
+                                <a href="{% url 'products:comment_admin' comment_id=comment.id %}"
+                                   class="text-decoration-none">
+                                    {% if comment.active %}
+                                        <button class="btn-sm btn-warning ms-auto">Disabled</button>
+                                    {% else %}
+                                        <button class="btn-sm btn-success ms-auto">Enabled</button>
+                                    {% endif %}
+                                </a>
+                                <a href="{% url 'products:comment_delete_admin' comment_id=comment.id %}" class="text-decoration-none">
+                                    <button class="btn-sm btn-danger ms-auto">Delete</button>
+                                </a>
+                            {% endif %}
+                        </div>
+
+                        <!-- COMMENT 1 - END -->
+                    {% endfor %}
+                {% else %}
+                    <p>No comments yet.</p>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -55,6 +55,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+
+    # user middleware
+    'store.middleware.PermissionDeniedMiddleware',
 ]
 
 ROOT_URLCONF = 'store.urls'
@@ -91,7 +94,7 @@ INTERNAL_IPS = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'store_db.sqlite3',
     }
 }
 
@@ -120,9 +123,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Kiev'
 
-USE_I18N = True
+USE_I18N = False
+USE_I10L = False
+
+DATE_FORMAT = 'd-m-Y'
+DATETIME_FORMAT = 'd b Y - H:i:s'
 
 USE_TZ = True
 
