@@ -1,11 +1,15 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView
-from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView, View
 from django.views.generic.list import ListView
 
 from common.views import TitleMixin
-from products.models import Product, ProductCategory, Basket
+from products.forms import CommentForm
+from products.models import Product, ProductCategory, Basket, Comment, CommentLike
 
 
 class IndexView(TitleMixin, TemplateView):
@@ -37,12 +41,58 @@ class ProductDetailView(TitleMixin, DetailView):
     model = Product
     template_name = 'products/product_detail.html'
     title = 'Store - Product details'
+    queryset = Product.published.all()
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(ProductDetailView, self).get_context_data()
+        context = super(ProductDetailView, self).get_context_data(**kwargs)
 
+        context['form'] = CommentForm(initial={'product': self.object})
         context['categories'] = ProductCategory.objects.all()
         return context
+
+    # @method_decorator(login_required, name='dispatch')
+    def post(self, request, *args, **kwargs):
+        post_comment = self.get_object()
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            new_comment = Comment(body=request.POST.get('body'),
+                                  author=self.request.user,
+                                  product=self.get_object())
+            new_comment.save()
+            return HttpResponseRedirect(f'{post_comment.get_absolute_url()}')
+        return self.render_to_response({'product': post_comment, 'form': form})
+
+
+class CommentLikeView(LoginRequiredMixin, View):
+    def get(self, request, comment_id):
+        comment = get_object_or_404(Comment, id=comment_id)
+        comment_like, created = CommentLike.objects.get_or_create(comment=comment, user=request.user)
+        if not created:
+            comment_like.delete()
+        return HttpResponseRedirect(f'{comment.product.get_absolute_url()}')
+
+
+class CommentLikeAdminView(LoginRequiredMixin, View):
+    def get(self, request, comment_id):
+        comment = get_object_or_404(Comment, id=comment_id)
+
+        if not request.user.is_superuser:
+            raise PermissionDenied("You don't have permission to admin comments")
+
+        comment.active = False if comment.active else True
+        comment.save()
+        return HttpResponseRedirect(f'{comment.product.get_absolute_url()}')
+
+
+class CommentDeleteAdminView(LoginRequiredMixin, View):
+    model = Comment
+
+    def get(self, request, comment_id):
+        comment = get_object_or_404(Comment, id=comment_id)
+        if not request.user.is_superuser:
+            raise PermissionDenied("You don't have permission to admin comments")
+        comment.delete()
+        return HttpResponseRedirect(f'{comment.product.get_absolute_url()}')
 
 
 @login_required
