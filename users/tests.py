@@ -50,7 +50,6 @@ class UserRegistrationViewTestCase(TestCase):
 
 
 class UserLoginViewTestCase(TestCase):
-
     def setUp(self):
         self.data = {
             'first_name': 'Andrii', 'last_name': 'Sky',
@@ -67,33 +66,35 @@ class UserLoginViewTestCase(TestCase):
         self.assertEqual(response.context_data['title'], 'Store - Login')
         self.assertTemplateUsed(response, 'users/login.html')
 
-    def test_02_user_login_post_error(self):
+    def test_02_user_login_post_success(self):
+        self.user = User.objects.create_user(
+            username=self.data['username'], email=self.data['email'], password=self.data['password'])
+
+        response = self.client.post(self.path, self.data, follow=True)
+
+        user = response.context.get('user')
+        self.assertTrue(user.is_authenticated)
+
+    def test_03_redirect_if_user_is_authenticated(self):
+        self.user = User.objects.create_user(
+            username=self.data['username'], email=self.data['email'], password=self.data['password'])
+
+        response = self.client.post(self.path, {'username': self.data['username'],
+                                                'password': self.data['password'],
+                                                })
+        homepage_url = reverse('index')
+        self.assertRedirects(response, homepage_url, status_code=302, target_status_code=200)
+
+    def test_04_user_login_post_error(self):
         username = self.data['username']
         self.assertFalse(User.objects.filter(username=username).exists())  # there was no username BEFORE the request
 
-        response = self.client.post(self.path, self.data)
+        response = self.client.post(self.path, self.data, follow=True)
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertContains(response,
                             'Please enter a correct username and password. Note that both fields may be case-sensitive.',
                             html=True)
 
-    def test_03_user_login_post_success(self):
-        User.objects.create(username=self.data['username'], password=self.data['password'])
-        self.assertTrue(User.objects.filter(username=self.data['username']).exists())
-
-        response = self.client.post(
-            self.path,
-            data={
-                'username': self.data['username'],
-                'password': self.data['password'],
-            },
-            follow_redirects=True
-        )
-        self.assertEqual(response.status_code, HTTPStatus.OK)
-        """ finish later """
-
-
-
-
-
+        user = response.context.get('user')
+        self.assertFalse(user.is_authenticated)
