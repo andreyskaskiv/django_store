@@ -46,7 +46,7 @@
                                     {% if comment|is_liked_by:request.user %}
                                         <ul class="list-unstyled list-inline media-detail pull-right">
                                             <li class="">
-                                                <a href="{% url 'products:comment_like' comment_id=comment.id %}">Unlike
+                                                <a id="comment_like" href="{% url 'products:comment_like' comment_id=comment.id %}">Unlike
                                                     <i class="fas fa-thumbs-up mx-2 fa-xs"
                                                        style="margin-top: -0.16rem;"></i>
                                                     {{ comment.likes_count }}
@@ -56,7 +56,7 @@
                                     {% else %}
                                         <ul class="list-unstyled list-inline media-detail pull-right">
                                             <li class="">
-                                                <a href="{% url 'products:comment_like' comment_id=comment.id %}">Unlike
+                                                <a id="comment_like" href="{% url 'products:comment_like' comment_id=comment.id %}">Unlike
                                                     <i class="far fa-thumbs-up mx-2 fa-xs text-black"
                                                        style="margin-top: -0.16rem;"></i>
                                                     {{ comment.likes_count }}
