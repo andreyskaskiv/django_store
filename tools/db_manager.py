@@ -24,7 +24,7 @@ def write_to_db_products(goods: list[dict[str, str]]):
         category_id = ProductCategory.objects.filter(name=product['category']).first()
         Product.objects.create(name=product['name'],
                                description=product['description'],
-                               price=product['price'],
+                               price=float(product['price']),
                                quantity=product['quantity'],
                                image=product['image'],
                                category=category_id,

@@ -30,6 +30,10 @@ env = environ.Env(
     EMAIL_HOST_USER=str,
     EMAIL_HOST_PASSWORD=str,
     EMAIL_USE_SSL=bool,
+
+    STRIPE_PUBLIC_KEY=str,
+    STRIPE_SECRET_KEY=str,
+    STRIPE_WEBHOOK_SECRET=str,
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,7 +41,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Take environment variables from .env file
 environ.Env.read_env(BASE_DIR / '.env')
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -113,7 +116,6 @@ INTERNAL_IPS = [
     "localhost",
 ]
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -122,7 +124,6 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'store_db.sqlite3',
     }
-
 
     # 'default': {
     #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -134,7 +135,6 @@ DATABASES = {
     # }
 
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -154,7 +154,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -169,7 +168,6 @@ DATE_FORMAT = 'd-m-Y'
 DATETIME_FORMAT = 'd b Y - H:i:s'
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -205,7 +203,6 @@ else:
     EMAIL_HOST_USER = env('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
     EMAIL_USE_SSL = env('EMAIL_USE_SSL')
-
 
 # Stripe
 
