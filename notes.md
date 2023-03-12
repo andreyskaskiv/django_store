@@ -376,7 +376,28 @@ ___________________________________
     def create_stripe_product_price()
 
     ```
+    
+16. Add in products/models
+    
+    <a href="#de_json">de_json</a>
+    ```
+    products -> models.py added 
+    def de_json(self)
 
+    ```
+    
+17. Add in orders/models
+
+    <a href="#basket_history">basket_history</a>
+
+    ```
+    products -> models.py added 
+    def de_json(self)
+    
+    orders -> models.py added 
+    def update_after_payment(self)
+
+    ```
 
 
 ___________________________________
@@ -477,7 +498,29 @@ ___________________________________
 
    ```
 
+* Test de_json
 
+    <a name="de_json"></a>
+   ```pycon
+    from products.models import Basket, Product
+    basket = Basket.objects.last()
+    basket.de_json()
+    {'product_name': 'Short Chiffon Dress', 'quantity': 1, 'price': 49.99, 'sum': 49.99}
+
+   ```
+  
+* Test basket_history
+
+    <a name="basket_history"></a>
+   ```pycon
+    from orders.models import Order
+    order = Order.objects.get(id=12)
+    order
+    <Order: Order #12. Petro Sky>
+    order.basket_history
+    {'purchased_items': [{'product_name': 'Short Dress', 'quantity': 1, 'price': 24.99, 'sum': 24.99},
+   {'product_name': 'Short Chiffon Dress', 'quantity': 1, 'price': 49.99, 'sum': 49.99}], 'total_sum': 74.98}
+   ```
 
 
 
