@@ -1,5 +1,5 @@
 {% extends 'products/_base.html' %}
-{#{% load humanize %}#}
+{% load humanize %}
 
 {% block content %}
 
@@ -26,12 +26,12 @@
                                     <h6 class="my-0">{{ basket.product.name }}</h6>
                                     <small class="text-muted">{{ basket.quantity }} items.</small>
                                 </div>
-                                <span class="text-muted">{{ basket.sum }} usdt.</span>
+                                <span class="text-muted">{{ basket.sum|intcomma }} usdt.</span>
                             </li>
                         {% endfor %}
                         <li class="list-group-item d-flex justify-content-between">
                             <span>Amount payable</span>
-                            <strong>{{ baskets.total_sum }} usdt.</strong>
+                            <strong>{{ baskets.total_sum|intcomma }} usdt.</strong>
                         </li>
                     </ul>
                 </div>
