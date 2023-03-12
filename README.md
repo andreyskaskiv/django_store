@@ -9,10 +9,10 @@
 3. OAuth &#10060;
 4. TestCase &#10060;/&#9989;
 5. <a href="#Integration_testing"> Integration testing </a> - &#9989;
-6. caching, Redis
+6. caching, Redis &#10060;
 7. Generation goods &#9989;
 8. django-debug-toolbar &#9989;
-9. Celery &#9989;
+9. Celery &#10060;
 10. Forgot your password? &#10060;
 
 Project Configuration
