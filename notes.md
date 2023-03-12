@@ -232,7 +232,6 @@ ___________________________________
       ....
    ]
    ```
-   
 3. Create Templates:
    ```
    templates/orders ->  order-create.html
@@ -268,25 +267,50 @@ ___________________________________
    python manage.py makemigrations
    python manage.py migrate
    ```
-   
 8. Create forms:
    ```
    orders -> forms.py
    
    OrderForm
    ```
-
 9. Registration in admin panel:
    ```
    orders -> admin.py
    
    OrderAdmin
    ```
+10. stripe.com
+    1. https://stripe.com/docs/checkout/quickstart?lang=python
+    
+    2. STRIPE
+    ```pycon
+    STRIPE_PUBLIC_KEY = env('STRIPE_PUBLIC_KEY')
+    STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
+    STRIPE_WEBHOOK_SECRET = env('STRIPE_WEBHOOK_SECRET')
+      ```
+    3. ```pip3 install stripe```
+    
+11. Create Templates:
+    ```
+    templates/orders ->  
+    
+    cancled.html
+    success.html
+    ```
+12. Create Views:
+    ```
+    SuccessTemplateView, CanceledTemplateView
+    ```
 
+13. Create orders/urls:
+    ```pycon
+    urlpatterns = [
+    ...
 
-
-
-
+    path('order-success/', SuccessTemplateView.as_view(), name='order_success'),
+    path('order-canceled/', CanceledTemplateView.as_view(), name='order_canceled'),
+    ]
+    ```
 
 
 ___________________________________
@@ -335,6 +359,22 @@ ___________________________________
 
    settings.DOMAIN_NAME
    'http://127.0.0.1:8000'
+
+   ```
+  
+* Test reverse
+
+   ```pycon
+    from django.conf import settings
+    from django.urls import reverse
+  
+    success_url='{}{}'.format(settings.DOMAIN_NAME, reverse('orders:order_success'))
+    success_url
+    'http://127.0.0.1:8000/orders/order-success/'
+  
+    cancel_url='{}{}'.format(settings.DOMAIN_NAME, reverse('orders:order_canceled'))
+    cancel_url
+    'http://127.0.0.1:8000/orders/order-canceled/'
 
    ```
 
