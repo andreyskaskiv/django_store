@@ -320,7 +320,13 @@ ___________________________________
     2023-03-12 22:55:38   --> payment_intent.created [evt_3MkvvZIJNrmkY0J21gWLPRYz]
     2023-03-12 22:55:38  <--  [200] POST http://127.0.0.1:8000/webhook/stripe/ [evt_1MkvvaIJNrmkY0J2h73o3k8z]2023-03-12 22:55:38  <--  [200] POST http://127.0.0.1:8000/webhook/stripe/ [evt_3MkvvZIJNrmkY0J21aGhZDEK]2023-03-12 22:55:38  <--  [200] POST http://127.0.0.1:8000/webhook/stripe/ [evt_3MkvvZIJNrmkY0J21gWLPRYz]
     ```
-    
+    7. api <a href="#create_stripe_product_price">create_stripe_product_price</a>
+
+    https://stripe.com/docs/api/checkout/sessions/create#create_checkout_session-line_items-price_data
+    https://stripe.com/docs/payments/accept-a-payment
+
+
+
 
 11. Create Templates:
     ```
@@ -360,9 +366,16 @@ ___________________________________
     path('webhook/stripe/', stripe_webhook_view, name='stripe_webhook'),
     ...
     ]
-    
     ```
+    
+15. Add in products/models
 
+    ```
+    products -> models.py added 
+    def save()
+    def create_stripe_product_price()
+
+    ```
 
 
 
@@ -430,6 +443,41 @@ ___________________________________
     'http://127.0.0.1:8000/orders/order-canceled/'
 
    ```
+
+* Test create_stripe_product_price()
+
+    <a name="create_stripe_product_price"></a>
+   ```pycon
+    from products.models import Product
+    product = Product.objects.last()
+  
+    product.create_stripe_product_price()
+  
+    <Price price id=price_1MkwUFIJNrmkY0J2SnTs4QC7 at 0x230acb52750> JSON: {
+      "active": true,
+      "billing_scheme": "per_unit",
+      "created": 1678656687,
+      "currency": "usd",
+      "custom_unit_amount": null,
+      "id": "price_1MkwUFIJNrmkY0J2SnTs4QC7",
+      "livemode": false,
+      "lookup_key": null,
+      "metadata": {},
+      "nickname": null,
+      "object": "price",
+      "product": "prod_NVyRa1eLdcGyZg",
+      "recurring": null,
+      "tax_behavior": "unspecified",
+      "tiers_mode": null,
+      "transform_quantity": null,
+      "type": "one_time",
+      "unit_amount": 2499,
+      "unit_amount_decimal": "2499"
+    }
+
+   ```
+
+
 
 
 

@@ -10,7 +10,7 @@ class ProductAdmin(admin.ModelAdmin):
     """How and what will be reflected in the admin panel"""
 
     list_display = ('name', 'price', 'quantity', 'category', 'publish', 'status')
-    fields = ('image', 'name', 'description', ('price', 'quantity'), 'category', 'status', 'publish')
+    fields = ('image', 'name', 'description', ('price', 'quantity'), 'stripe_product_price_id', 'category', 'status', 'publish')
     list_filter = ('status', 'created', 'publish')
     # readonly_fields = ('description',)
     search_fields = ('name',)
