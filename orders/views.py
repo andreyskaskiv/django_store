@@ -2,8 +2,9 @@ from http import HTTPStatus
 
 import stripe
 from django.conf import settings
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy, reverse
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView, TemplateView
 
 from common.views import TitleMixin
@@ -48,3 +49,11 @@ class OrderCreateView(TitleMixin, CreateView):
     def form_valid(self, form):
         form.instance.initiator = self.request.user
         return super(OrderCreateView, self).form_valid(form)
+
+
+@csrf_exempt
+def stripe_webhook_view(request):
+    payload = request.body
+
+
+    return HttpResponse(status=200)
