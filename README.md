@@ -23,6 +23,10 @@ Project Configuration
 ------------------------------------------
 -
 
+Tutorial: <a href="notes.md">notes.md</a>
+
+------------------------------------------
+-
 1. Install packages:
    ```bash
    pip install --upgrade pip
