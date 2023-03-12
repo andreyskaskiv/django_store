@@ -332,7 +332,7 @@ ___________________________________
     ```
     templates/orders ->  
     
-    cancled.html
+    canceled.html
     success.html
     ```
 12. Create Views:
@@ -398,6 +398,25 @@ ___________________________________
     def update_after_payment(self)
 
     ```
+
+18. Create Templates:
+   ```
+   templates/orders ->  orders.html
+   ```
+19. Create Views:
+   ```
+   orders -> views.py added OrderListView
+   ```
+20. Create orders/urls:
+   ```
+   orders -> urls.py added urlpatterns
+   
+   urlpatterns = [
+    path('', OrderListView.as_view(), name='orders_list'),
+   ]
+   ```
+
+
 
 
 ___________________________________
