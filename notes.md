@@ -416,6 +416,25 @@ ___________________________________
    ]
    ```
 
+21. Create Templates:
+   ```
+   templates/orders ->  order.html
+   ```
+22. Create Views:
+   ```
+   orders -> views.py added OrderDetailView
+   ```
+23. Create orders/urls:
+   ```
+   orders -> urls.py added urlpatterns
+   
+   urlpatterns = [
+    path('', OrderDetailView.as_view(), name='order'),
+   ]
+   ```
+
+
+
 
 
 
