@@ -289,7 +289,39 @@ ___________________________________
     STRIPE_WEBHOOK_SECRET = env('STRIPE_WEBHOOK_SECRET')
       ```
     3. ```pip3 install stripe```
+    4. 
+    ```
+    checkout_session=..... 
+    ```
+    5. webhook
     
+    https://stripe.com/docs/payments/checkout/fulfill-orders
+
+    https://stripe.com/docs/stripe-cli#login-account
+    
+    ```
+    C:\>stripe status
+    
+    ✔ All services are online.
+    As of: March 12, 2023 @ 08:36PM +00:00
+    ```
+    6. create webhook
+    
+    ```
+    C:\>stripe listen --forward-to 127.0.0.1:8000/webhook/stripe/
+    
+    Ready! You are using Stripe API Version [2022-11-15]. 
+    Your webhook signing secret is whsec_73899a70b0c3418c309e0a8e3512d872366d7c7ceeb52d77f5575c633da6318 (^C to quit)
+    ```
+    ```
+    2023-03-12 22:55:38   --> charge.succeeded [evt_3MkvvZIJNrmkY0J21uUcE2Eu]
+    2023-03-12 22:55:38  <--  [200] POST http://127.0.0.1:8000/webhook/stripe/ [evt_3MkvvZIJNrmkY0J21uUcE2Eu]2023-03-12 22:55:38   --> checkout.session.completed [evt_1MkvvaIJNrmkY0J2h73o3k8z]
+    2023-03-12 22:55:38   --> payment_intent.succeeded [evt_3MkvvZIJNrmkY0J21aGhZDEK]
+    2023-03-12 22:55:38   --> payment_intent.created [evt_3MkvvZIJNrmkY0J21gWLPRYz]
+    2023-03-12 22:55:38  <--  [200] POST http://127.0.0.1:8000/webhook/stripe/ [evt_1MkvvaIJNrmkY0J2h73o3k8z]2023-03-12 22:55:38  <--  [200] POST http://127.0.0.1:8000/webhook/stripe/ [evt_3MkvvZIJNrmkY0J21aGhZDEK]2023-03-12 22:55:38  <--  [200] POST http://127.0.0.1:8000/webhook/stripe/ [evt_3MkvvZIJNrmkY0J21gWLPRYz]
+    ```
+    
+
 11. Create Templates:
     ```
     templates/orders ->  
@@ -299,6 +331,7 @@ ___________________________________
     ```
 12. Create Views:
     ```
+    orders -> views.py 
     SuccessTemplateView, CanceledTemplateView
     ```
 
@@ -311,6 +344,26 @@ ___________________________________
     path('order-canceled/', CanceledTemplateView.as_view(), name='order_canceled'),
     ]
     ```
+14. Create your event handler
+    ```
+    orders -> views.py 
+    
+    def stripe_webhook_view
+    ```
+    
+15. Add in store/urls
+    ```
+    store -> urls.py added urlpatterns
+    
+    urlpatterns = [
+    ...
+    path('webhook/stripe/', stripe_webhook_view, name='stripe_webhook'),
+    ...
+    ]
+    
+    ```
+
+
 
 
 ___________________________________
