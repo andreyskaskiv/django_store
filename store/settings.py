@@ -64,7 +64,9 @@ INSTALLED_APPS = [
 
     "debug_toolbar",
 
+    # user apps
     'products',
+    'orders',
     'users',
 ]
 
