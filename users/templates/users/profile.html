@@ -1,5 +1,6 @@
 {% extends 'products/_base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block css %}
     <link href="{% static 'vendor/css/profile.css' %}" rel="stylesheet">
@@ -22,7 +23,7 @@
                          class="img-thumbnail">
                 </div>
 
-            {% include 'users/messages.html' %}
+                {% include 'users/messages.html' %}
 
                 <form action="{% url 'users:profile' user.id %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -75,10 +76,14 @@
                         </div>
                     </div>
                 </form>
+
+                <hr>
+                {% include 'products/likes.html' %}
             </div>
 
+
             <div class="col-lg-5">
-            {% include 'products/baskets.html' %}
+                {% include 'products/baskets.html' %}
             </div>
         </div>
     </div>

@@ -111,7 +111,7 @@ class Comment(models.Model):
 
 class CommentLike(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='likes')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comment_likes')
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='comment_likes')
 
     class Meta:
         unique_together = ('comment', 'user')
