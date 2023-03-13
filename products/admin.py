@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from products.models import Basket, Product, ProductCategory, Comment, CommentLike
+from products.models import Basket, Product, ProductCategory, Comment, CommentLike, ProductLike
 
 admin.site.register(ProductCategory)
 
@@ -10,7 +10,8 @@ class ProductAdmin(admin.ModelAdmin):
     """How and what will be reflected in the admin panel"""
 
     list_display = ('name', 'price', 'quantity', 'category', 'publish', 'status')
-    fields = ('image', 'name', 'description', ('price', 'quantity'), 'stripe_product_price_id', 'category', 'status', 'publish')
+    fields = (
+    'image', 'name', 'description', ('price', 'quantity'), 'stripe_product_price_id', 'category', 'status', 'publish')
     list_filter = ('status', 'created', 'publish')
     # readonly_fields = ('description',)
     search_fields = ('name',)
@@ -29,6 +30,12 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ('product', 'author', 'created', 'active')
     list_filter = ('active', 'created')
     search_fields = ('body',)
+
+
+@admin.register(ProductLike)
+class ProductLikeAdmin(admin.ModelAdmin):
+    list_display = ('product', 'user')
+    search_fields = ('user__username',)
 
 
 @admin.register(CommentLike)

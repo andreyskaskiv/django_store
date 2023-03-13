@@ -3,13 +3,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
 from django.views.generic.base import TemplateView, View
 from django.views.generic.list import ListView
 
 from common.views import TitleMixin
 from products.forms import CommentForm
-from products.models import Product, ProductCategory, Basket, Comment, CommentLike
+from products.models import Product, ProductCategory, Basket, Comment, CommentLike, ProductLike
 
 
 class IndexView(TitleMixin, TemplateView):
@@ -50,7 +52,7 @@ class ProductDetailView(TitleMixin, DetailView):
         context['categories'] = ProductCategory.objects.all()
         return context
 
-    # @method_decorator(login_required, name='dispatch')
+    @method_decorator(login_required, name='dispatch')
     def post(self, request, *args, **kwargs):
         post_comment = self.get_object()
         form = CommentForm(request.POST)
@@ -70,6 +72,15 @@ class CommentLikeView(LoginRequiredMixin, View):
         if not created:
             comment_like.delete()
         return HttpResponseRedirect(f'{comment.product.get_absolute_url()}')
+
+
+class ProductLikeView(LoginRequiredMixin, View):
+    def get(self, request, product_id):
+        product = get_object_or_404(Product, id=product_id)
+        product_like, created = ProductLike.objects.get_or_create(product=product, user=request.user)
+        if not created:
+            product_like.delete()
+        return HttpResponseRedirect(reverse_lazy('products:index'))
 
 
 class CommentLikeAdminView(LoginRequiredMixin, View):

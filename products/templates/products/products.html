@@ -1,4 +1,5 @@
 {% extends 'products/_base.html' %}
+{% load comment_filter %}
 {% load static %}
 {% load humanize %}
 
@@ -34,6 +35,32 @@
                                     <h5>{{ product.price|intcomma }} usdt</h5>
                                     <p class="card-text">{{ product.description }}</p>
                                 </div>
+
+                                <!-- product.liked -->
+                                <div class="container pull-right">
+                                    {% if product|is_liked_by:request.user %}
+                                        <div class="d-flex flex-row align-items-center text-primary">
+                                            <p class="small mb-0">Unlike</p>
+                                            <a href="{% url 'products:product_like' product_id=product.id %}">
+                                                <i class="fas fa-thumbs-up mx-2 fa-xs"
+                                                   style="margin-top: -0.16rem;"></i>
+                                            </a>
+                                            <p class="small mb-0">{{ product.likes_count }}</p>
+                                        </div>
+
+                                    {% else %}
+                                        <div class="d-flex flex-row align-items-center">
+                                            <p class="small text-muted mb-0">Like</p>
+                                            <a href="{% url 'products:product_like' product_id=product.id %}">
+                                                <i class="far fa-thumbs-up mx-2 fa-xs text-black"
+                                                   style="margin-top: -0.16rem;"></i>
+                                            </a>
+                                            <p class="small text-muted mb-0">{{ product.likes_count }}</p>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <!-- endproduct.liked -->
+
                                 <div class="card-footer text-center">
                                     <a class="btn btn-outline-success"
                                        href="{% url 'products:basket_add'  product.id %}">

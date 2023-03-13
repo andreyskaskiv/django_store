@@ -80,7 +80,7 @@ class Product(models.Model):
         return stripe_product_price
 
 
-class PostLike(models.Model):
+class ProductLike(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='likes')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='product_likes')
 
