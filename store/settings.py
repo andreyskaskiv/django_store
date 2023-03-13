@@ -104,6 +104,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
 
                 'products.context_processors.baskets',
+                'products.context_processors.likes',
             ],
         },
     },
