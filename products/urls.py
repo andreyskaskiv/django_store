@@ -5,7 +5,8 @@ from products.views import (ProductsListView,
                             basket_add, basket_remove,
                             CommentLikeView,
                             CommentLikeAdminView,
-                            CommentDeleteAdminView)
+                            CommentDeleteAdminView,
+                            ProductLikeView)
 
 app_name = 'products'
 
@@ -16,6 +17,7 @@ urlpatterns = [
     path('page/<int:page>/', ProductsListView.as_view(), name='paginator'),
 
     path('comment-like/<int:comment_id>', CommentLikeView.as_view(), name='comment_like'),
+    path('product-like/<int:product_id>', ProductLikeView.as_view(), name='product_like'),
     path('comment-like/admin/<int:comment_id>', CommentLikeAdminView.as_view(), name='comment_admin'),
     path('comment-delete/admin/<int:comment_id>/', CommentDeleteAdminView.as_view(), name='comment_delete_admin'),
 
