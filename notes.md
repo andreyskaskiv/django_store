@@ -560,7 +560,10 @@ ___________________________________
    {'product_name': 'Short Chiffon Dress', 'quantity': 1, 'price': 49.99, 'sum': 49.99}], 'total_sum': 74.98}
    ```
 
-
+*  django_extensions
+    ```
+   python manage.py shell_plus
+   ```
 
 
 
