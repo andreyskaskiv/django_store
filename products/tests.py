@@ -61,5 +61,6 @@ class ProductDetailViewTestCase(TestCase):
         response = self.client.get(path)
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertContains(response, '<title>Store - Product details</title>')
         self.assertEqual(response.context_data['title'], 'Store - Product details')
         self.assertTemplateUsed(response, 'products/product_detail.html')

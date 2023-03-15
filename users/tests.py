@@ -11,6 +11,9 @@ from users.models import EmailVerification, User
 class UserRegistrationViewTestCase(TestCase):
 
     def setUp(self):
+        self.user = User.objects.create_user(
+            username='user1', email='user1@gmail.com', password='1234')
+
         self.data = {
             'first_name': 'Andrii', 'last_name': 'Sky',
             'username': 'andrii', 'email': 'andrii@gmail.ru',
@@ -47,6 +50,18 @@ class UserRegistrationViewTestCase(TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertContains(response, 'A user with that username already exists.', html=True)
+
+    def test_04_invalid_form(self):
+        # We don't give a username
+        response = self.client.post(reverse('users:register'),
+                                    {
+                                        "email": self.data['email'],
+                                        "password1": self.data['password1'],
+                                        "password2": self.data['password2'],
+                                    })
+        form = response.context.get('form')
+
+        self.assertFalse(form.is_valid())
 
 
 class UserLoginViewTestCase(TestCase):
