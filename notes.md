@@ -462,7 +462,7 @@ ___________________________________
    ```
 
 * Fixture
-   ```bash
+   ```pycon
    python manage.py dumpdata products.ProductCategory > products/fixtures/categories.json
    python manage.py dumpdata products.Product > products/fixtures/goods.json
    ```
@@ -570,3 +570,81 @@ ___________________________________
 <a href="#top">UP</a>
 
 
+```
+>>> User.objects.all()
+<QuerySet [<User: andrey>, <User: testUser>]>
+```
+
+```
+>>> for e in User.objects.all():
+...     print(e)
+...     
+andrey
+testUser
+```
+
+```
+>>> User.objects.filter(username='andrey')
+<QuerySet [<User: andrey>]>
+```
+
+```
+>>> User.objects.filter(username='testUser').values()
+<QuerySet [
+{'id': 29, 
+'password': 'pbkdf2_sha256$260000$aJudPiEE7xCVk8ME74q2Vf$/FPWZ9esv7m3Vbw7RPt4cJu2+TMX4qtSDR5xLo6c0fE=', 
+'last_login': datetime.datetime(2023, 3, 13, 14, 10, 50, 809658, tzinfo=<UTC>), 
+'is_superuser': False, 
+'username': 'testUser', 
+'first_name': 'testUser', 
+'last_name': 'Sky', 
+'email': 'admin@mail.com', 
+'is_staff': False, 
+'is_active': True, 
+'date_joined': datetime.datetime(2023, 3, 13, 14, 10, 48, 336961, tzinfo=<UTC>), 
+'image': '', 'is_verified_email': False}
+]>
+```
+
+```
+>>> User.objects.values('username')
+<QuerySet [{'username': 'andrey'}, {'username': 'testUser'}]>
+
+>>> User.objects.values('last_name')
+<QuerySet [{'last_name': ''}, {'last_name': 'Sky'}]>
+```
+
+---
+Methods that do not return QuerySets¶
+
+```
+>>> User.objects.get(id=29)
+<User: testUser>
+```
+
+```
+>>> User.objects.filter(id=29)
+<QuerySet [<User: testUser>]>
+
+>>> User.objects.filter(id=29).get()
+<User: testUser>
+```
+
+```
+>>> User.objects.get_or_create(username='testUser')
+(<User: testUser>, False)
+
+>>> User.objects.get_or_create(username='testUser1')
+(<User: testUser1>, True)
+```
+
+```
+>>> User.objects.all()
+<QuerySet [<User: andrey>, <User: testUser>, <User: test_user_create>]>
+
+>>> User.objects.filter(username='test_user_create').delete()
+(1, {'users.User': 1})
+
+>>> User.objects.all()
+<QuerySet [<User: andrey>, <User: testUser>]>
+```

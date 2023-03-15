@@ -50,6 +50,10 @@ def prepare_goods(goods: list[dict[str, str]]):
     return goods_to_json
 
 
+# def write_to_json(value: list[dict[str, str]], json_file: str):
+#     with open(json_file, 'w') as file:
+#         json.dump(value, file, indent=4)
+
 def write_to_json(value: list[dict[str, str]], json_file: str):
-    with open(json_file, 'w') as file:
-        json.dump(value, file, indent=4)
+    with open(json_file, 'w', encoding='utf-8') as file:
+        json.dump(value, file, indent=4, ensure_ascii=False)
