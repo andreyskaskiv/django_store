@@ -419,42 +419,50 @@ Create requirements.txt, .gitignore, Tutorial.md, .env
 - authenticity = подлинность
 - authorization(permissions) = предоставление определённому лицу или группе лиц прав на выполнение определённых действий
 
-  1. added
-      ```
-      _django_rest_framework_lessons_/settings.py -> 
+1. added
+    ```
+    store/settings.py -> 
     
-      # OAuth
-      AUTHENTICATION_BACKENDS = [
-          'django.contrib.auth.backends.ModelBackend',
-          'allauth.account.auth_backends.AuthenticationBackend',
-      ]
-      ```
-       ```
-      #INSTALLED_APPS = [
-            'django.contrib.sites',
-            'allauth',
-            'allauth.account',
-            'allauth.socialaccount',
-            'allauth.socialaccount.providers.github',
-      ]
-      ```   
+    # OAuth
+    AUTHENTICATION_BACKENDS = [
+        'django.contrib.auth.backends.ModelBackend',
+        'allauth.account.auth_backends.AuthenticationBackend',
+    ]
+    ```
      ```
-      SITE_ID = 1
-     ```
-      ```
-     SOCIALACCOUNT_PROVIDERS = {
-            'github': {
-                'SCOPE': [
-                    'user',
-                ],
-            }
-        }
-      ```
+    #INSTALLED_APPS = [
+          'django.contrib.sites',
+          'allauth',
+          'allauth.account',
+          'allauth.socialaccount',
+          'allauth.socialaccount.providers.github',
+    ]
+    ```   
+     
+    SITE_ID - установить PK github
+    [SITE_ID](http://127.0.0.1:8000/admin/sites/site/)
+    ![SITE_ID.png](docs%2FSITE_ID.png)
+    
+    ```
+    store/settings.py -> 
+    
+    
+    SITE_ID = 1
+    ```
+    
+    ```
+    SOCIALACCOUNT_PROVIDERS = {
+         'github': {
+             'SCOPE': [
+                 'user',
+             ],
+         }
+     }
+    ```
 
-   
 2. Add in _django_rest_framework_lessons_/urls
    ```
-   _django_rest_framework_lessons_ -> urls.py added urlpatterns
+   store -> urls.py added urlpatterns
    
     urlpatterns = patterns('',
         ...
@@ -467,9 +475,12 @@ Create requirements.txt, .gitignore, Tutorial.md, .env
    users/templates/users -> login.html
    
    {% load socialaccount %}
-   
-   
    ```
+4. Select social application to change:
+
+    http://127.0.0.1:8000/admin/socialaccount/socialapp/ 
+
+    ![Social_application.png](docs%2FSocial_application.png)
 
 
 
