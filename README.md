@@ -6,39 +6,43 @@
 
 1. Class base view &#9989;
 2. Database Postgresql &#10060;
-3. OAuth &#10060;
+3. OAuth &#9989;
 4. TestCase &#10060;/&#9989;
 5. <a href="#Integration_testing"> Integration testing </a> - &#9989;
-6. caching, Redis &#10060;
+6. Caching, Redis &#10060;
 7. Generation goods &#9989;
 8. django-debug-toolbar &#9989;
 9. Celery &#10060;
 10. Forgot your password? &#10060;
 
-Project Configuration
-1. Api
-2. nginx
-3. Docker
 
-------------------------------------------
--
+---
 
-Tutorial: <a href="notes.md">notes.md</a>
 
-------------------------------------------
--
+<a href="Tutorial.md">Tutorial.md</a>
+
+---
+
 1. Install packages:
    ```bash
    pip install --upgrade pip
-   pip install -r requirements.txt
    ```
+   pip install -r requirements.txt
    
 2. Run project dependencies, migrations, fill the database with the fixture data etc.:
+  
    ```bash
    python manage.py migrate
-   python manage.py loaddata <path_to_fixture_files>
-   python manage.py runserver 
+   python manage.py createsuperuser
    ```
+
+   ```bash
+   python manage.py loaddata <path_to_fixture_files>
+   
+   python manage.py loaddata products/fixtures/categories.json
+   python manage.py loaddata products/fixtures/goods.json
+   ```
+
 3. Runserver
    ```bash
    python manage.py runserver
