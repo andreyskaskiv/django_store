@@ -5,7 +5,7 @@
 <a name="top"></a>
 
 1. Class base view &#9989;
-2. Database Postgresql &#10060;
+2. Database Postgresql &#9989;
 3. OAuth &#9989;
 4. TestCase &#10060;/&#9989;
 5. <a href="#Integration_testing"> Integration testing </a> - &#9989;
@@ -28,6 +28,12 @@
    pip install -r requirements.txt
    ```
 2. Run project dependencies, migrations, fill the database with the fixture data etc.:
+
+   ```bash
+   systemctl start postgresql.service 
+   ```
+   
+   Create a database, section 5 in the <a href="Tutorial.md">Tutorial.md</a>
   
    ```bash
    python manage.py migrate
