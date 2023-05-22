@@ -1,37 +1,38 @@
 ~~~shell
-$ pip install -r requirements.txt
-~~~
-
-~~~shell
 $ pip freeze > requirements.txt
 ~~~
-<a name="top"></a>
-### Tutorial
 
+<a name="top"></a>
+
+---
+
+# Tutorial
+
+---
 Firstly, create and activate a new virtual environment:
    ```bash
    python -m venv venv
    source venv\Scripts\activate
    pip install django==3.2.12
    ```
-   - python -m venv venv
-   - venv\Scripts\activate
-   - pip install django==3.2.12
-___________________________________
---
 
-### 1. Create project 
-   ```
-   python manage.py startapp products
-   ```
 ---
-### 2. app products:
+Create requirements.txt, .gitignore, Tutorial.md, .env  
+`django-admin startproject store`
+---
+1. Create app <a href="#products">products</a>
+2. Create app <a href="#users">users</a>
+3. Create app <a href="#orders">orders</a> (stripe.com)
+4. Create <a href="#oauth">OAuth</a>
 
-1. Create app products
+
+---
+### 1. Create app products: <a name="products"></a>
+
+1. Create app
    ```pycon
    python manage.py startapp products
    ```
-   
 2. Registration products:
    ```
    settings.py -> 
@@ -58,7 +59,6 @@ ___________________________________
 
    CreateView, UpdateView, DeleteView
    ```
-
 5. Create products/urls:
    ```
    products -> urls.py added urlpatterns
@@ -89,7 +89,6 @@ ___________________________________
       ...
    ]
    ```
-
 7. Create models:
    ```
    products -> models.py
@@ -101,12 +100,10 @@ ___________________________________
    python manage.py makemigrations
    python manage.py migrate
    ```
-   
 8. Create createsuperuser
    ```
    python manage.py createsuperuser
    ```
-
 9. Create forms:
    ```
    products -> forms.py
@@ -121,15 +118,13 @@ ___________________________________
    ProductAdmin, BasketAdmin, CommentAdmin, CommentLikeAdmin
    ```
 
-
 ---
-### 3. app users:
+### 2. Create app users: <a name="users"></a>
 
-1. Create app users
+1. Create app
    ```
    python manage.py startapp users
    ```
-   
 2. Registration products:
    ```
    settings.py -> 
@@ -140,12 +135,10 @@ ___________________________________
       ....
    ]
    ```
-   
 3. Create Templates:
    ```
    templates/users ->  ~~~.html
    ```
-   
 4. Create Views:
    ```
    users -> views.py 
@@ -157,7 +150,6 @@ ___________________________________
    class DataGenerationView(FormView)
 
    ```
-
 5. Create users/urls:
    ```
    users -> urls.py added urlpatterns
@@ -172,7 +164,6 @@ ___________________________________
        path('service/', DataGenerationView.as_view(), name='service'),  # ../users/service
    ]
    ```
-   
 6. Add in store/urls
    ```
    store -> urls.py added urlpatterns
@@ -183,7 +174,6 @@ ___________________________________
       ...
    ]
    ```
-
 7. Create models:
    ```
    users -> models.py
@@ -194,31 +184,23 @@ ___________________________________
    python manage.py makemigrations
    python manage.py migrate
    ```
-   
-8. Create createsuperuser
-   ```
-   python manage.py createsuperuser
-   ```
-
-9. Create forms:
+8. Create forms:
    ```
    users -> forms.py
    
    UserLoginForm, UserRegistrationForm, UserProfileForm, GenerateDataForm
    ```
-
-10. Registration in admin panel:
+9. Registration in admin panel:
    ```
    users -> admin.py
    
    UserAdmin, EmailVerificationAdmin
    ```
 
-
 ---
-### 3. app orders:
+### 3. Create app orders: <a name="orders"></a>
 
-1. Create app orders
+1. Create app
    ```pycon
    python manage.py startapp orders
    ```
@@ -283,50 +265,47 @@ ___________________________________
     1. https://stripe.com/docs/checkout/quickstart?lang=python
     
     2. STRIPE
-    ```pycon
-    STRIPE_PUBLIC_KEY = env('STRIPE_PUBLIC_KEY')
-    STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
-    STRIPE_WEBHOOK_SECRET = env('STRIPE_WEBHOOK_SECRET')
-      ```
+         ```pycon
+         STRIPE_PUBLIC_KEY = env('STRIPE_PUBLIC_KEY')
+         STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
+         STRIPE_WEBHOOK_SECRET = env('STRIPE_WEBHOOK_SECRET')
+         ```
     3. ```pip3 install stripe```
     4. 
-    ```
-    checkout_session=..... 
-    ```
+        ```
+        checkout_session=..... 
+        ```
     5. webhook
     
-    https://stripe.com/docs/payments/checkout/fulfill-orders
+        https://stripe.com/docs/payments/checkout/fulfill-orders
 
-    https://stripe.com/docs/stripe-cli#login-account
+        https://stripe.com/docs/stripe-cli#login-account
     
-    ```
-    C:\>stripe status
+        ```
+        C:\>stripe status
     
-    ✔ All services are online.
-    As of: March 12, 2023 @ 08:36PM +00:00
-    ```
+        ✔ All services are online.
+        As of: March 12, 2023 @ 08:36PM +00:00
+        ```
     6. create webhook
     
-    ```
-    C:\>stripe listen --forward-to 127.0.0.1:8000/webhook/stripe/
+        ```
+        C:\>stripe listen --forward-to 127.0.0.1:8000/webhook/stripe/
     
-    Ready! You are using Stripe API Version [2022-11-15]. 
-    Your webhook signing secret is whsec_73899a70b0c3418c309e0a8e3512d872366d7c7ceeb52d77f5575c633da6318 (^C to quit)
-    ```
-    ```
-    2023-03-12 22:55:38   --> charge.succeeded [evt_3MkvvZIJNrmkY0J21uUcE2Eu]
-    2023-03-12 22:55:38  <--  [200] POST http://127.0.0.1:8000/webhook/stripe/ [evt_3MkvvZIJNrmkY0J21uUcE2Eu]2023-03-12 22:55:38   --> checkout.session.completed [evt_1MkvvaIJNrmkY0J2h73o3k8z]
-    2023-03-12 22:55:38   --> payment_intent.succeeded [evt_3MkvvZIJNrmkY0J21aGhZDEK]
-    2023-03-12 22:55:38   --> payment_intent.created [evt_3MkvvZIJNrmkY0J21gWLPRYz]
-    2023-03-12 22:55:38  <--  [200] POST http://127.0.0.1:8000/webhook/stripe/ [evt_1MkvvaIJNrmkY0J2h73o3k8z]2023-03-12 22:55:38  <--  [200] POST http://127.0.0.1:8000/webhook/stripe/ [evt_3MkvvZIJNrmkY0J21aGhZDEK]2023-03-12 22:55:38  <--  [200] POST http://127.0.0.1:8000/webhook/stripe/ [evt_3MkvvZIJNrmkY0J21gWLPRYz]
-    ```
+        Ready! You are using Stripe API Version [2022-11-15]. 
+        Your webhook signing secret is whsec_73899a70b0c3418c309e0a8e3512d872366d7c7ceeb52d77f5575c633da6318 (^C to quit)
+        ```
+        ```
+        2023-03-12 22:55:38   --> charge.succeeded [evt_3MkvvZIJNrmkY0J21uUcE2Eu]
+        2023-03-12 22:55:38  <--  [200] POST http://127.0.0.1:8000/webhook/stripe/ [evt_3MkvvZIJNrmkY0J21uUcE2Eu]2023-03-12 22:55:38   --> checkout.session.completed [evt_1MkvvaIJNrmkY0J2h73o3k8z]
+        2023-03-12 22:55:38   --> payment_intent.succeeded [evt_3MkvvZIJNrmkY0J21aGhZDEK]
+        2023-03-12 22:55:38   --> payment_intent.created [evt_3MkvvZIJNrmkY0J21gWLPRYz]
+        2023-03-12 22:55:38  <--  [200] POST http://127.0.0.1:8000/webhook/stripe/ [evt_1MkvvaIJNrmkY0J2h73o3k8z]2023-03-12 22:55:38  <--  [200] POST http://127.0.0.1:8000/webhook/stripe/ [evt_3MkvvZIJNrmkY0J21aGhZDEK]2023-03-12 22:55:38  <--  [200] POST http://127.0.0.1:8000/webhook/stripe/ [evt_3MkvvZIJNrmkY0J21gWLPRYz]
+        ```
     7. api <a href="#create_stripe_product_price">create_stripe_product_price</a>
 
-    https://stripe.com/docs/api/checkout/sessions/create#create_checkout_session-line_items-price_data
-    https://stripe.com/docs/payments/accept-a-payment
-
-
-
+        https://stripe.com/docs/api/checkout/sessions/create#create_checkout_session-line_items-price_data
+        https://stripe.com/docs/payments/accept-a-payment
 
 11. Create Templates:
     ```
@@ -366,9 +345,8 @@ ___________________________________
     path('webhook/stripe/', stripe_webhook_view, name='stripe_webhook'),
     ...
     ]
-    ```
-    
-15. Add in products/models
+    ``` 
+16. Add in products/models
 
     ```
     products -> models.py added 
@@ -376,8 +354,7 @@ ___________________________________
     def create_stripe_product_price()
 
     ```
-    
-16. Add in products/models
+17. Add in products/models
     
     <a href="#de_json">de_json</a>
     ```
@@ -385,8 +362,7 @@ ___________________________________
     def de_json(self)
 
     ```
-    
-17. Add in orders/models
+18. Add in orders/models
 
     <a href="#basket_history">basket_history</a>
 
@@ -398,16 +374,15 @@ ___________________________________
     def update_after_payment(self)
 
     ```
-
-18. Create Templates:
+19. Create Templates:
    ```
    templates/orders ->  orders.html
    ```
-19. Create Views:
+20. Create Views:
    ```
    orders -> views.py added OrderListView
    ```
-20. Create orders/urls:
+21. Create orders/urls:
    ```
    orders -> urls.py added urlpatterns
    
@@ -416,15 +391,15 @@ ___________________________________
    ]
    ```
 
-21. Create Templates:
+22. Create Templates:
    ```
    templates/orders ->  order.html
    ```
-22. Create Views:
+23. Create Views:
    ```
    orders -> views.py added OrderDetailView
    ```
-23. Create orders/urls:
+24. Create orders/urls:
    ```
    orders -> urls.py added urlpatterns
    
@@ -433,12 +408,74 @@ ___________________________________
    ]
    ```
 
+---
+### 5. Create OAuth:  <a name="oauth"></a> 
+
+* [django-allauth](https://django-allauth.readthedocs.io/en/latest/installation.html)
+* [django-allauth GitHub](https://django-allauth.readthedocs.io/en/latest/providers.html#github)
+* [django-allauth Templates](https://django-allauth.readthedocs.io/en/latest/templates.html)
+
+
+- authenticity = подлинность
+- authorization(permissions) = предоставление определённому лицу или группе лиц прав на выполнение определённых действий
+
+  1. added
+      ```
+      _django_rest_framework_lessons_/settings.py -> 
+    
+      # OAuth
+      AUTHENTICATION_BACKENDS = [
+          'django.contrib.auth.backends.ModelBackend',
+          'allauth.account.auth_backends.AuthenticationBackend',
+      ]
+      ```
+       ```
+      #INSTALLED_APPS = [
+            'django.contrib.sites',
+            'allauth',
+            'allauth.account',
+            'allauth.socialaccount',
+            'allauth.socialaccount.providers.github',
+      ]
+      ```   
+     ```
+      SITE_ID = 1
+     ```
+      ```
+     SOCIALACCOUNT_PROVIDERS = {
+            'github': {
+                'SCOPE': [
+                    'user',
+                ],
+            }
+        }
+      ```
+
+   
+2. Add in _django_rest_framework_lessons_/urls
+   ```
+   _django_rest_framework_lessons_ -> urls.py added urlpatterns
+   
+    urlpatterns = patterns('',
+        ...
+        path('accounts/', include('allauth.urls')),
+        ...
+    )
+   ```
+3. Create templates:
+   ```
+   users/templates/users -> login.html
+   
+   {% load socialaccount %}
+   
+   
+   ```
 
 
 
 
 
-___________________________________
+__________________________________
 ---
 
 * QuerySet
@@ -565,86 +602,87 @@ ___________________________________
    python manage.py shell_plus
    ```
 
+    ````
+    >>> User.objects.all()
+    <QuerySet [<User: andrey>, <User: testUser>]>
+    ````
+
+    ```
+    >>> for e in User.objects.all():
+    ...     print(e)
+    ...     
+    andrey
+    testUser
+    ```
+
+    ```
+    >>> User.objects.filter(username='andrey')
+    <QuerySet [<User: andrey>]>
+    ```
+    
+    ```
+    >>> User.objects.filter(username='testUser').values()
+    <QuerySet [
+    {'id': 29, 
+    'password': 'pbkdf2_sha256$260000$aJudPiEE7xCVk8ME74q2Vf$/FPWZ9esv7m3Vbw7RPt4cJu2+TMX4qtSDR5xLo6c0fE=', 
+    'last_login': datetime.datetime(2023, 3, 13, 14, 10, 50, 809658, tzinfo=<UTC>), 
+    'is_superuser': False, 
+    'username': 'testUser', 
+    'first_name': 'testUser', 
+    'last_name': 'Sky', 
+    'email': 'admin@mail.com', 
+    'is_staff': False, 
+    'is_active': True, 
+    'date_joined': datetime.datetime(2023, 3, 13, 14, 10, 48, 336961, tzinfo=<UTC>), 
+    'image': '', 'is_verified_email': False}
+    ]>
+    ```
+    
+    ```
+    >>> User.objects.values('username')
+    <QuerySet [{'username': 'andrey'}, {'username': 'testUser'}]>
+    
+    >>> User.objects.values('last_name')
+    <QuerySet [{'last_name': ''}, {'last_name': 'Sky'}]>
+    ```
+
+    Methods that do not return QuerySets¶
+    
+    ```
+    >>> User.objects.get(id=29)
+    <User: testUser>
+    ```
+    
+    ```
+    >>> User.objects.filter(id=29)
+    <QuerySet [<User: testUser>]>
+    
+    >>> User.objects.filter(id=29).get()
+    <User: testUser>
+    ```
+    
+    ```
+    >>> User.objects.get_or_create(username='testUser')
+    (<User: testUser>, False)
+    
+    >>> User.objects.get_or_create(username='testUser1')
+    (<User: testUser1>, True)
+    ```
+    
+    ```
+    >>> User.objects.all()
+    <QuerySet [<User: andrey>, <User: testUser>, <User: test_user_create>]>
+    
+    >>> User.objects.filter(username='test_user_create').delete()
+    (1, {'users.User': 1})
+    
+    >>> User.objects.all()
+    <QuerySet [<User: andrey>, <User: testUser>]>
+    ```
+
+
 
 
 <a href="#top">UP</a>
 
 
-```
->>> User.objects.all()
-<QuerySet [<User: andrey>, <User: testUser>]>
-```
-
-```
->>> for e in User.objects.all():
-...     print(e)
-...     
-andrey
-testUser
-```
-
-```
->>> User.objects.filter(username='andrey')
-<QuerySet [<User: andrey>]>
-```
-
-```
->>> User.objects.filter(username='testUser').values()
-<QuerySet [
-{'id': 29, 
-'password': 'pbkdf2_sha256$260000$aJudPiEE7xCVk8ME74q2Vf$/FPWZ9esv7m3Vbw7RPt4cJu2+TMX4qtSDR5xLo6c0fE=', 
-'last_login': datetime.datetime(2023, 3, 13, 14, 10, 50, 809658, tzinfo=<UTC>), 
-'is_superuser': False, 
-'username': 'testUser', 
-'first_name': 'testUser', 
-'last_name': 'Sky', 
-'email': 'admin@mail.com', 
-'is_staff': False, 
-'is_active': True, 
-'date_joined': datetime.datetime(2023, 3, 13, 14, 10, 48, 336961, tzinfo=<UTC>), 
-'image': '', 'is_verified_email': False}
-]>
-```
-
-```
->>> User.objects.values('username')
-<QuerySet [{'username': 'andrey'}, {'username': 'testUser'}]>
-
->>> User.objects.values('last_name')
-<QuerySet [{'last_name': ''}, {'last_name': 'Sky'}]>
-```
-
----
-Methods that do not return QuerySets¶
-
-```
->>> User.objects.get(id=29)
-<User: testUser>
-```
-
-```
->>> User.objects.filter(id=29)
-<QuerySet [<User: testUser>]>
-
->>> User.objects.filter(id=29).get()
-<User: testUser>
-```
-
-```
->>> User.objects.get_or_create(username='testUser')
-(<User: testUser>, False)
-
->>> User.objects.get_or_create(username='testUser1')
-(<User: testUser1>, True)
-```
-
-```
->>> User.objects.all()
-<QuerySet [<User: andrey>, <User: testUser>, <User: test_user_create>]>
-
->>> User.objects.filter(username='test_user_create').delete()
-(1, {'users.User': 1})
-
->>> User.objects.all()
-<QuerySet [<User: andrey>, <User: testUser>]>
-```
