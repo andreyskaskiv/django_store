@@ -24,6 +24,7 @@ Create requirements.txt, .gitignore, Tutorial.md, .env
 2. Create app <a href="#users">users</a>
 3. Create app <a href="#orders">orders</a> (stripe.com)
 4. Create <a href="#oauth">OAuth</a>
+5. Create <a href="#postgres">Postgres</a>
 
 
 ---
@@ -409,7 +410,7 @@ Create requirements.txt, .gitignore, Tutorial.md, .env
    ```
 
 ---
-### 5. Create OAuth:  <a name="oauth"></a> 
+### 4. Create OAuth:  <a name="oauth"></a> 
 
 * [django-allauth](https://django-allauth.readthedocs.io/en/latest/installation.html)
 * [django-allauth GitHub](https://django-allauth.readthedocs.io/en/latest/providers.html#github)
@@ -438,9 +439,9 @@ Create requirements.txt, .gitignore, Tutorial.md, .env
           'allauth.socialaccount.providers.github',
     ]
     ```   
-     
-    SITE_ID - установить PK github
-    [SITE_ID](http://127.0.0.1:8000/admin/sites/site/)
+
+    [SITE_ID](http://127.0.0.1:8000/admin/sites/site/) - установить PK github
+
     ![SITE_ID.png](docs%2FSITE_ID.png)
     
     ```
@@ -460,7 +461,7 @@ Create requirements.txt, .gitignore, Tutorial.md, .env
      }
     ```
 
-2. Add in _django_rest_framework_lessons_/urls
+2. Add in store/urls
    ```
    store -> urls.py added urlpatterns
    
@@ -483,6 +484,97 @@ Create requirements.txt, .gitignore, Tutorial.md, .env
     ![Social_application.png](docs%2FSocial_application.png)
 
 
+
+---
+
+### 5. Create Postgres: <a name="postgres"></a>
+
+![products_app.png](docs%2Fproducts_app.png)    
+
+1. install
+
+   * https://docs.djangoproject.com/en/4.1/ref/databases/
+   * https://docs.djangoproject.com/en/4.1/ref/databases/#postgresql-notes
+   * https://www.postgresql.org/download/
+   * https://postgresapp.com/
+   * https://gist.github.com/marcorichetta/af0201a74f8185626c0223836cd79cfa
+
+    ```
+    sudo pacman -S postgresql
+    
+    sudo -i -u postgres
+    initdb --locale en_US.UTF-8 -D '/var/lib/postgres/data'
+    systemctl start postgresql.service
+    exit
+    ```
+    ```pycon
+    systemctl status postgresql.service
+    ```
+   
+2. create 
+    ```pycon
+    sudo su - postgres
+    psql
+    
+    \list
+    
+    - CREATE DATABASE shop_db;
+    - CREATE ROLE shop_username with password 'shop_password';
+    - ALTER ROLE "shop_username" WITH LOGIN;
+    - GRANT ALL PRIVILEGES ON DATABASE "shop_db" to shop_username;
+    - ALTER USER shop_username CREATEDB;
+    
+    psycopg2.errors.InsufficientPrivilege:
+    - GRANT postgres TO shop_username;
+    ```
+    ```pycon
+    sudo su - postgres
+    psql
+    
+    \list
+    
+    \c shop_db
+    
+    \dt 
+    
+    \q
+    ```
+3. settings.py
+
+    ```
+    import os
+    
+    ...
+    
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': env('DATABASE_NAME'),
+            'USER': env('DATABASE_USER'),
+            'PASSWORD': env('DATABASE_PASSWORD'),
+            'HOST': env('DATABASE_HOST'),
+            'PORT': env('DATABASE_PORT'),
+        }
+    }
+    ```
+
+4. migrate
+   ```
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
+   
+5. Create createsuperuser
+   ```
+   python manage.py createsuperuser
+   ```
+6. Loaddata fixtures
+    ```bash
+        python manage.py loaddata <path_to_fixture_files>
+        
+        python manage.py loaddata products/fixtures/categories.json
+        python manage.py loaddata products/fixtures/goods.json
+    ```
 
 
 

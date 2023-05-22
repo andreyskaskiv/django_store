@@ -16,6 +16,7 @@ import environ
 
 env = environ.Env(
     DEBUG=bool,
+    SQLite=bool,
     SECRET_KEY=str,
     DOMAIN_NAME=str,
 
@@ -128,22 +129,25 @@ INTERNAL_IPS = [
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'store_db.sqlite3',
+SQLite = env('SQLite')
+if SQLite:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'store_db.sqlite3',
+        }
     }
-
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': env('DATABASE_NAME'),
-    #     'USER': env('DATABASE_USER'),
-    #     'PASSWORD': env('DATABASE_PASSWORD'),
-    #     'HOST': env('DATABASE_HOST'),
-    #     'PORT': env('DATABASE_PORT'),
-    # }
-
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': env('DATABASE_NAME'),
+            'USER': env('DATABASE_USER'),
+            'PASSWORD': env('DATABASE_PASSWORD'),
+            'HOST': env('DATABASE_HOST'),
+            'PORT': env('DATABASE_PORT'),
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -226,7 +230,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-SITE_ID = 2
+SITE_ID = 4
 
 SOCIALACCOUNT_PROVIDERS = {
     'github': {
