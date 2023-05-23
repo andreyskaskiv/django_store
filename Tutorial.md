@@ -621,6 +621,86 @@ https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
     if settings.DEBUG:
         urlpatterns.append(path('__debug__/', include('debug_toolbar.urls')))
    ```
+   
+4. Redis  
+    https://redis.io/docs/getting-started/  
+    https://github.com/jazzband/django-redis
+
+5. install
+
+    ```shell
+    sudo systemctl start redis
+    sudo systemctl status redis 
+    ```
+6. Install the App:
+   ```
+   store/settings.py -> 
+   
+   CACHES = {
+       "default": {
+           "BACKEND": "django_redis.cache.RedisCache",
+           "LOCATION": "redis://127.0.0.1:6379/1",
+           "OPTIONS": {
+               "CLIENT_CLASS": "django_redis.client.DefaultClient",
+           }
+       }
+    }
+   
+    ```
+
+7. The per-view cache  
+
+   https://docs.djangoproject.com/en/4.2/topics/cache/#the-per-view-cache
+
+   7.1. cache_page  
+
+       ```
+       products/urls.py -> 
+    
+        from django.views.decorators.cache import cache_page
+
+        path('', cache_page(30)(ProductsListView.as_view()), name='index'),
+
+       ```
+
+    7.2. Template fragment caching
+
+       ```
+       products/templates/products/products.html-> 
+    
+        {% load static cache%}
+        
+
+        {% cache 30 object_list %}
+
+        {% for product in object_list %} 
+        {% endfor %}
+
+        {% endcache %}
+        
+       ```
+    7.3. Basic usage
+   
+        ```
+        products/views.py-> 
+    
+        from django.core.cache import cache
+    
+        class ProductsListView(TitleMixin, ListView):
+        ...
+    
+        def get_context_data(self, *, object_list=None, **kwargs):
+            context = super(ProductsListView, self).get_context_data()
+        
+            categories = cache.get('categories')
+            if not categories:
+                context['categories'] = ProductCategory.objects.all()
+                cache.set('categories', context['categories'], 30)
+            else:
+                context['categories'] = categories
+            return context
+        
+        ```
 
 
 
