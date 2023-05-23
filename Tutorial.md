@@ -27,6 +27,8 @@ Create requirements.txt, .gitignore, Tutorial.md, .env
 5. Create <a href="#postgres">Postgres</a>
 6. Create <a href="#testcase">TestCase</a>
 7. Create <a href="#redis">Redis</a>
+8. Create <a href="#celery">Celery</a>
+
 
 
 ---
@@ -701,6 +703,51 @@ https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
             return context
         
         ```
+
+
+---
+### 8. Create Celery: <a name="celery"></a>
+https://docs.celeryq.dev/en/stable/getting-started/first-steps-with-celery.html#installing-celery  
+https://docs.celeryq.dev/en/stable/django/first-steps-with-django.html
+    ```pycon
+    pip install "celery[redis]"
+    ```
+
+1. Create celery.py  
+    ``` store -> celery.py```
+2. Create __init__.py:
+    Path: store/__init__.py
+    ```python
+        from .celery_app import app as celery_app
+    
+    __all__ = ('celery_app',)
+    ```
+   
+3. settings.py
+    ```
+    store/settings.py -> 
+    
+    # Celery
+
+    CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+    CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
+    ```
+   
+4. added celery task  
+
+    ```python
+    class UserRegistrationForm(UserCreationForm):
+        ...
+        def save(self, commit=True):
+            user = super(UserRegistrationForm, self).save(commit=True)
+            send_email_verification.delay(user.id)
+            return user
+    ```
+5. Create tasks.py
+
+```shell
+celery -A store worker -l INFO
+```
 
 
 
