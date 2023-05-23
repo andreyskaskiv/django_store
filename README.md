@@ -9,10 +9,10 @@
 3. OAuth &#9989;
 4. TestCase &#10060;/&#9989;
 5. <a href="#Integration_testing"> Integration testing </a> - &#9989;
-6. Caching, Redis &#10060;
+6. Caching, Redis &#9989;
 7. Generation goods &#9989;
 8. django-debug-toolbar &#9989;
-9. Celery &#10060;
+9. Celery &#9989;
 10. Forgot your password? &#10060;
 
 
@@ -40,12 +40,21 @@
    python manage.py migrate
    python manage.py createsuperuser
    ```
-
+   Fixtures:
    ```bash
    python manage.py loaddata <path_to_fixture_files>
    
    python manage.py loaddata products/fixtures/categories.json
    python manage.py loaddata products/fixtures/goods.json
+   ```
+   Redis:
+   ```bash
+   sudo systemctl start redis
+   sudo systemctl status redis 
+   ```
+   Celery:   
+   ```bash
+   celery -A store worker -l INFO
    ```
 
 3. Runserver
