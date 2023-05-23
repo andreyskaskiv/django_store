@@ -72,7 +72,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
 
-    # "debug_toolbar",
+    "debug_toolbar",
     "django.contrib.humanize",
     'django_extensions',
 
@@ -92,7 +92,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
 
-    # "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 
     # user middleware
     'store.middleware.PermissionDeniedMiddleware',

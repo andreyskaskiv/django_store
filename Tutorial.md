@@ -26,6 +26,7 @@ Create requirements.txt, .gitignore, Tutorial.md, .env
 4. Create <a href="#oauth">OAuth</a>
 5. Create <a href="#postgres">Postgres</a>
 6. Create <a href="#testcase">TestCase</a>
+7. Create <a href="#redis">Redis</a>
 
 
 ---
@@ -583,6 +584,44 @@ Create requirements.txt, .gitignore, Tutorial.md, .env
    ```pycon
     python manage.py test
    ```
+
+---
+### 7. Create Redis: <a name="redis"></a>
+
+1. django-debug-toolbar  
+https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
+
+2. Install the App:
+   ```
+   store/settings.py -> 
+   
+   INSTALLED_APPS = [
+      ....
+    "debug_toolbar",
+      ....
+   ]
+   
+   MIDDLEWARE = [
+        # ...
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
+        # ...
+    ]
+   
+   
+    INTERNAL_IPS = [
+        "127.0.0.1",
+    ]
+   
+   ```
+
+3. Add the URLs:
+   ```
+   store -> urls.py 
+   
+    if settings.DEBUG:
+        urlpatterns.append(path('__debug__/', include('debug_toolbar.urls')))
+   ```
+
 
 
 
