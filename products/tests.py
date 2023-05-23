@@ -21,15 +21,17 @@ class ProductsListViewTestCase(TestCase):
     fixtures = ['categories.json', 'goods.json']
 
     def setUp(self):
-        self.products = Product.objects.all()
+        self.products = Product.objects.all().order_by('id')
 
     def test_01_list(self):
         path = reverse('products:index')
         response = self.client.get(path)
 
         self._common_tests(response)
+        # print(list(response.context_data['object_list']))
+        # print(list(self.products[:9]))
 
-        self.assertEqual(list(response.context_data['object_list']), list(self.products[:3]))  # == paginate_by = 3
+        self.assertEqual(list(response.context_data['object_list']), list(self.products[:9]))  # == paginate_by = 9
 
     def test_02_list_with_category(self):
         category = ProductCategory.objects.first()
@@ -39,9 +41,12 @@ class ProductsListViewTestCase(TestCase):
 
         self._common_tests(response)
 
+        # print(list(response.context_data['object_list']))
+        # print(list(self.products.filter(category_id=category.id))[:9])  # == paginate_by = 9
+
         self.assertEqual(
             list(response.context_data['object_list']),
-            list(self.products.filter(category_id=category.id))
+            list(self.products.filter(category_id=category.id))[:9] # == paginate_by = 9
         )
 
     def _common_tests(self, response):
