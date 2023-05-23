@@ -31,6 +31,7 @@
 
    ```bash
    systemctl start postgresql.service 
+   systemctl status postgresql.service
    ```
    
    Create a database, section 5 in the <a href="Tutorial.md">Tutorial.md</a>

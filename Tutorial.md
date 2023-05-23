@@ -25,6 +25,7 @@ Create requirements.txt, .gitignore, Tutorial.md, .env
 3. Create app <a href="#orders">orders</a> (stripe.com)
 4. Create <a href="#oauth">OAuth</a>
 5. Create <a href="#postgres">Postgres</a>
+6. Create <a href="#testcase">TestCase</a>
 
 
 ---
@@ -575,6 +576,13 @@ Create requirements.txt, .gitignore, Tutorial.md, .env
         python manage.py loaddata products/fixtures/categories.json
         python manage.py loaddata products/fixtures/goods.json
     ```
+
+---
+### 6. Create TestCase: <a name="testcase"></a>
+
+   ```pycon
+    python manage.py test
+   ```
 
 
 
