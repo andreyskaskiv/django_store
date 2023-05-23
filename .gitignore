@@ -31,7 +31,6 @@ MANIFEST
 users_images
 db
 notes.md
-migrations
 tests_integration/img
 .env
 
