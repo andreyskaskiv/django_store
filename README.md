@@ -58,7 +58,11 @@
    ```
    Stripe:   
    ```bash
+   cd ... ./stripe
+   
    ./stripe status
+   
+   ./stripe listen --forward-to 127.0.0.1:8000/webhook/stripe/
    ```
 3. Runserver
    ```bash
