@@ -13,7 +13,7 @@
 7. Generation goods &#9989;
 8. django-debug-toolbar &#9989;
 9. Celery &#9989;
-10. Forgot your password? &#10060;
+10. stripe &#9989;
 
 
 ---
@@ -56,7 +56,10 @@
    ```bash
    celery -A store worker -l INFO
    ```
-
+   Stripe:   
+   ```bash
+   ./stripe status
+   ```
 3. Runserver
    ```bash
    python manage.py runserver

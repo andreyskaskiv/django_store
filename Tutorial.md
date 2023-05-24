@@ -278,22 +278,54 @@ Create requirements.txt, .gitignore, Tutorial.md, .env
     3. ```pip3 install stripe```
     4. 
         ```
-        checkout_session=..... 
+        class OrderCreateView(TitleMixin, CreateView):
+
+            def post(self, request, *args, **kwargs):
+                super(OrderCreateView, self).post(request, *args, **kwargs)
+                baskets = Basket.objects.filter(user=self.request.user)
+
+                checkout_session = stripe.checkout.Session.create(
+                    line_items=baskets.stripe_products(),
+                    metadata={'order_id': self.object.id},
+                    mode='payment',
+                    success_url='{}{}'.format(settings.DOMAIN_NAME, reverse('orders:order_success')),
+                    cancel_url='{}{}'.format(settings.DOMAIN_NAME, reverse('orders:order_canceled')),
+                )
+                return HttpResponseRedirect(checkout_session.url, status=HTTPStatus.SEE_OTHER)
         ```
-    5. webhook
+       
+        <a href="#test_reverse">Test_reverse</a>
+
+    5. Webhook
     
         https://stripe.com/docs/payments/checkout/fulfill-orders
 
-        https://stripe.com/docs/stripe-cli#login-account
-    
+        https://stripe.com/docs/stripe-cli#login-account  
+       `---------`  
+        Windows:
         ```
         C:\>stripe status
     
         ✔ All services are online.
         As of: March 12, 2023 @ 08:36PM +00:00
         ```
-    6. create webhook
-    
+       `---------`   
+        Manjaro Linux:
+       ```
+        tar -xvf stripe_1.14.7_linux_x86_64.tar.gz
+       
+       ./stripe
+       
+       ./stripe login --api-key sk_test_51MkuGpIJNr.......serq1Zw
+        ```
+       ```
+        ./stripe status
+             
+        ✔ All services are online.
+        As of: May 24, 2023 @ 10:45AM +00:00
+        ```
+    6. create webhook  
+        Windows:  
         ```
         C:\>stripe listen --forward-to 127.0.0.1:8000/webhook/stripe/
     
@@ -307,6 +339,22 @@ Create requirements.txt, .gitignore, Tutorial.md, .env
         2023-03-12 22:55:38   --> payment_intent.created [evt_3MkvvZIJNrmkY0J21gWLPRYz]
         2023-03-12 22:55:38  <--  [200] POST http://127.0.0.1:8000/webhook/stripe/ [evt_1MkvvaIJNrmkY0J2h73o3k8z]2023-03-12 22:55:38  <--  [200] POST http://127.0.0.1:8000/webhook/stripe/ [evt_3MkvvZIJNrmkY0J21aGhZDEK]2023-03-12 22:55:38  <--  [200] POST http://127.0.0.1:8000/webhook/stripe/ [evt_3MkvvZIJNrmkY0J21gWLPRYz]
         ```
+       Manjaro Linux:  
+       ```python
+        ./stripe listen --forward-to 127.0.0.1:8000/webhook/stripe/
+        > Ready! You are using Stripe API Version [2022-11-15]. Your webhook signing secret is whsec_673899a70b0c3418c309e0a8e3512d872366d7c7ceeb52d77f5575c633da6318 (^C to quit)
+       ```
+       ```
+        2023-05-24 14:23:22   --> charge.succeeded [evt_3NBFmnIJNrmkY0J200oHU6Sa]
+        2023-05-24 14:23:22   --> checkout.session.completed [evt_1NBFmpIJNrmkY0J283Ca7tzk]
+        2023-05-24 14:23:22  <--  [200] POST http://127.0.0.1:8000/webhook/stripe/ [evt_3NBFmnIJNrmkY0J200oHU6Sa]
+        2023-05-24 14:23:22   --> payment_intent.succeeded [evt_3NBFmnIJNrmkY0J208pdk6YM]
+        2023-05-24 14:23:22  <--  [200] POST http://127.0.0.1:8000/webhook/stripe/ [evt_1NBFmpIJNrmkY0J283Ca7tzk]
+        2023-05-24 14:23:22  <--  [200] POST http://127.0.0.1:8000/webhook/stripe/ [evt_3NBFmnIJNrmkY0J208pdk6YM]
+        2023-05-24 14:23:22   --> payment_intent.created [evt_3NBFmnIJNrmkY0J20nQmqsKk]
+        2023-05-24 14:23:22  <--  [200] POST http://127.0.0.1:8000/webhook/stripe/ [evt_3NBFmnIJNrmkY0J20nQmqsKk]
+        ```
+
     7. api <a href="#create_stripe_product_price">create_stripe_product_price</a>
 
         https://stripe.com/docs/api/checkout/sessions/create#create_checkout_session-line_items-price_data
@@ -801,12 +849,13 @@ __________________________________
 
    ```
   
-* Test reverse
+* Test_reverse: <a name="test_reverse"></a>
 
    ```pycon
     from django.conf import settings
     from django.urls import reverse
   
+    success_url='{}{}'.format(settings.DOMAIN_NAME, reverse('orders:order_success'))
     success_url='{}{}'.format(settings.DOMAIN_NAME, reverse('orders:order_success'))
     success_url
     'http://127.0.0.1:8000/orders/order-success/'
