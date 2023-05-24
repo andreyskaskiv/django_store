@@ -16,9 +16,14 @@ import environ
 
 env = environ.Env(
     DEBUG=bool,
+
     SQLite=bool,
+
     SECRET_KEY=str,
     DOMAIN_NAME=str,
+
+    REDIS_HOST=(str),
+    REDIS_PORT=(str),
 
     DATABASE_NAME=str,
     DATABASE_USER=str,
@@ -36,7 +41,6 @@ env = environ.Env(
     STRIPE_SECRET_KEY=str,
     STRIPE_WEBHOOK_SECRET=str,
 )
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -127,10 +131,13 @@ INTERNAL_IPS = [
     "localhost",
 ]
 
+REDIS_HOST = env('REDIS_HOST')
+REDIS_PORT = env('REDIS_PORT')
+
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
+        'LOCATION': f'redis://{REDIS_HOST}:{REDIS_PORT}/1',
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
@@ -229,8 +236,8 @@ else:
     EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
     EMAIL_USE_SSL = env('EMAIL_USE_SSL')
 
-# Stripe
 
+# Stripe
 STRIPE_PUBLIC_KEY = env('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
 STRIPE_WEBHOOK_SECRET = env('STRIPE_WEBHOOK_SECRET')
@@ -242,7 +249,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-SITE_ID = 4
+SITE_ID = 1
 
 SOCIALACCOUNT_PROVIDERS = {
     'github': {
@@ -255,5 +262,5 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 # Celery
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
-CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
+CELERY_BROKER_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}'
+CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:{REDIS_PORT}'
