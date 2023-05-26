@@ -4,16 +4,41 @@
 
 ---
 # **AWS**
+ 
+1. <a href="#connect_to_aws">Connect to AWS</a>
+2. <a href="#update_upgrade">Update & Upgrade</a>
+3. <a href="#new_sudo_enabled_user">New Sudo Enabled User</a>
+4. <a href="#creating_the_postgre_sql_database_and_user">Creating the PostgreSQL Database and User</a>
+5. <a href="#creating_a_python_virtual_environment_for_your_project">Creating a Python Virtual Environment for your Project</a>
+6. <a href="#file_zilla">FileZilla</a>
+7. <a href="#refactoring_file_env">Refactoring file `.env`</a>
+8. <a href="#requirements">Installing packages from requirements.txt</a>
+9. <a href="#static">STATIC</a>
+10. <a href="#gunicorn">Gunicorn</a>
+11. <a href="#nginx">Nginx</a>
+12. <a href="#redis">Redis</a>
+13. <a href="#celery">Celery</a>
+14. <a href="#firewall">Firewall</a>
+15. <a href="#domain_name">Domain name</a>
+16. <a href="#certbot">Certbot</a>
+17. <a href="#fixtures_media">Fixtures, Media</a>
+18. <a href="#email">Email</a>
+19. <a href="#oauth_git_hub">OAuth GitHub</a>
+20. <a href="#stripe">Stripe</a>
+
+
 
 ---
-### 1. Connect to AWS 
+### 1. Connect to AWS: <a name="connect_to_aws"></a>
 
 ```text
 chmod 400 StoreCredentials.pem
 ssh -i "StoreCredentials.pem" ubuntu@ec2-52-28-221-249.eu-central-1.compute.amazonaws.com
 ```
+---
+**After project settings:**
 
-After project settings:
+shell_plus:
 ```text
 cd store-server/store/
 
@@ -21,9 +46,27 @@ source ../venv/bin/activate
 
 python manage.py shell_plus
 ```
+nginx:
+```text
+sudo systemctl restart nginx
+sudo nginx -t
+```
+gunicorn:
+```text
+sudo systemctl restart gunicorn
+sudo systemctl status gunicorn
+```
+celery:
+```text
+sudo systemctl restart celery
+sudo systemctl status celery
+```
+test card for payment:  
+`4242 4242 4242 4242`
+
 
 ---
-### 2. Update & Upgrade
+### 2. Update & Upgrade: <a name="update_upgrade"></a>
 
 ```text
 sudo su
@@ -35,7 +78,7 @@ sudo apt install mc
 ```
 
 ---
-### 3. New Sudo Enabled User
+### 3. New Sudo Enabled User: <a name="new_sudo_enabled_user"></a>
 
 * [How To Create A New Sudo Enabled User on Ubuntu 22.04 [Quickstart]](https://www.digitalocean.com/community/tutorials/how-to-create-a-new-sudo-enabled-user-on-ubuntu-22-04-quickstart)
 
@@ -45,7 +88,7 @@ usermod -a -G ubuntu www-data
 ```
 
 ---
-### 4. Creating the PostgreSQL Database and User
+### 4. Creating the PostgreSQL Database and User: <a name="creating_the_postgre_sql_database_and_user"></a>
 
 ```text
 sudo apt install postgresql postgresql-contrib
@@ -66,7 +109,7 @@ sudo -u postgres psql
 ```
 
 ---
-### 5. Creating a Python Virtual Environment for your Project
+### 5. Creating a Python Virtual Environment for your Project: <a name="creating_a_python_virtual_environment_for_your_project"></a>
 
 ```text
 mkdir store-server
@@ -84,14 +127,14 @@ source venv/bin/activate
 ```
 
 ---
-### 6. FileZilla
+### 6. FileZilla: <a name="file_zilla"></a>
 
 ```text
 Transferring a project
 ```
 
 ---
-### 7. Refactoring file `.env`
+### 7. Refactoring file `.env` : <a name="refactoring_file_env"></a>
 ```text
 cd store/
 
@@ -116,7 +159,7 @@ settings.DATABASES
 ```
 
 ---
-### 8. Installing packages from requirements.txt
+### 8. Installing packages from requirements.txt: <a name="requirements"></a>
 
 ```text
 cd store-server/store
@@ -135,7 +178,7 @@ python manage.py createsuperuser
 ```
 
 ---
-### 9. STATIC
+### 9. STATIC: <a name="static"></a>
 
 * [How to deploy static files](https://docs.djangoproject.com/en/4.2/howto/static-files/deployment/)
 
@@ -154,7 +197,7 @@ http://52.28.221.249:8000
 
 
 ---
-### 10. Gunicorn
+### 10. Gunicorn: <a name="gunicorn"></a>
 
 * [Testing Gunicorn’s Ability to Serve the Project](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-22-04#adjusting-the-project-settings)
 
@@ -220,7 +263,7 @@ sudo systemctl restart gunicorn
 ```
 
 ---
-### 11. Nginx 
+### 11. Nginx: <a name="nginx"></a>
 
 * [Configure Nginx to Proxy Pass to Gunicorn](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-22-04#configure-nginx-to-proxy-pass-to-gunicorn)
 
@@ -263,7 +306,7 @@ http://52.28.221.249
 
 
 ---
-### 12. Redis 
+### 12. Redis: <a name="redis"></a>
 
 * [How To Install and Secure Redis on Ubuntu 22.04](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-22-04)
 
@@ -298,7 +341,7 @@ sudo systemctl status redis
 
 
 ---
-### 13. Celery 
+### 13. Celery: <a name="celery"></a>
 
 * [Celery, Usage systemd](https://docs.celeryq.dev/en/stable/userguide/daemonizing.html#usage-systemd)
 
@@ -331,7 +374,7 @@ sudo systemctl status celery
 ```
 
 ---
-### 14. Firewall 
+### 14. Firewall: <a name="firewall"></a>
 
 * [Step 4 — Setting Up a Firewall](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-22-04#step-4-setting-up-a-firewall)
 
@@ -354,13 +397,212 @@ sudo ufw enable
 sudo ufw status
 ```
 
+---
+### 15. Domain name: <a name="domain_name"></a>  - not working yet (:
+
+* [Configure Nginx to Proxy Pass to Gunicorn](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-22-04#configure-nginx-to-proxy-pass-to-gunicorn)
+
+domain = REPTILIANS_RULE_THE_BALL.UA :)
+
+```text
+sudo nano /etc/nginx/sites-available/store
+```
+```text
+server {
+    listen 80;
+    server_name REPTILIANS_RULE_THE_BALL.UA;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /home/ubuntu/store-server/store;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/run/gunicorn.sock;
+    }
+}
+```
+
+```text
+sudo systemctl restart nginx
+sudo nginx -t
+```
+```text
+sudo systemctl restart gunicorn
+sudo systemctl status gunicorn
+```
+```text
+sudo systemctl restart celery
+sudo systemctl status celery
+```
+
+http://REPTILIANS_RULE_THE_BALL.UA - not working yet (:
 
 
+---
+### 16. Certbot: <a name="certbot"></a>
+
+* [Step 1 — Installing Certbot](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-22-04#step-1-installing-certbot)
+
+```text
+sudo snap install core; sudo snap refresh core
+```
+```text
+sudo snap install --classic certbot
+```
+```text
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+```
+```text
+sudo certbot --nginx -d REPTILIANS_RULE_THE_BALL.UA
+```
+```text
+sudo nano /etc/nginx/sites-available/store
+```
+
+---
+### 17. Fixtures, Media: <a name="fixtures_media"></a>
+
+```text
+ssh -i "StoreCredentials.pem" ubuntu@ec2-52-28-221-249.eu-central-1.compute.amazonaws.com
+cd store-server/store/
+source ../venv/bin/activate
+```
+```text
+python manage.py loaddata products/fixtures/categories.json
+python manage.py loaddata products/fixtures/goods.json
+```
+```text
+FileZilla  ->  copy media
+```
+```text
+sudo nano /etc/nginx/sites-available/store
+```
+```text
+server {
+    listen 80;
+    server_name 52.28.221.249;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /home/ubuntu/store-server/store;
+    }
+    
+    location /media/ {
+        root /home/ubuntu/store-server/store;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/run/gunicorn.sock;
+    }
+}
+```
+```text
+sudo systemctl restart nginx
+sudo nginx -t
+```
+```text
+sudo systemctl restart gunicorn
+sudo systemctl status gunicorn
+```
+```text
+sudo systemctl restart celery
+sudo systemctl status celery
+```
+
+---
+### 18. Email: <a name="email"></a>
+
+```text
+cd store-server/store/
+```
+```text
+nano .env
+```
+```text
+DOMAIN_NAME=https://REPTILIANS_RULE_THE_BALL.UA
+```
+```text
+sudo systemctl restart gunicorn
+sudo systemctl status gunicorn
+```
+```text
+sudo systemctl restart celery
+sudo systemctl status celery
+```
+
+---
+### 19. OAuth GitHub: <a name="oauth_git_hub"></a>
+
+* App registration (get your key and secret here):  
+    [github.com](https://github.com/settings/applications/new) 
+
+* Development callback URL:  
+    http://52.28.221.249/accounts/github/login/callback/  
+    or  
+    https://REPTILIANS_RULE_THE_BALL.UA/accounts/github/login/callback/
+
+* Shell_plus:
+
+    ```text
+    cd store-server/store/
+    
+    source ../venv/bin/activate
+    
+    python manage.py shell_plus
+  
+    >>> Site.objects.all()
+    <QuerySet [<Site: github.com>]>
+  
+    >>> Site.objects.filter(domain="github.com").values('id')
+    <QuerySet [{'id': 1}]>
+    ```
+
+* Admin panel (Select site to change): 
+
+    [SITE_ID](http://52.28.221.249/admin/sites/site/) - put PK github
+
+    ```text
+    cd store
+    ```
+    ```text
+    nano settings.py
+    ```
+    ```
+    SITE_ID = 1
+    ```
+  
+* Admin panel (Select social application to change): 
+
+    [Add social application](http://52.28.221.249/admin/socialaccount/socialapp/add/)
 
 
+---
+### 20. Stripe: <a name="stripe"></a>  
 
+* [Take webhooks live](https://stripe.com/docs/webhooks/go-live)
+* [webhooks](https://dashboard.stripe.com/webhooks)
 
-
-
+    ```text
+    cd store-server/store/
+    ```
+    ```text
+    nano .env
+    ```
+    ```text
+    STRIPE_WEBHOOK_SECRET=whsec_DPDxMqK7v7PDUAKEAwmu8XcCEGG8SmiN5i
+    ```
+    ```text
+    sudo systemctl restart gunicorn
+    sudo systemctl status gunicorn
+    ```
+    ```text
+    sudo systemctl restart celery
+    sudo systemctl status celery
+    ```
+    test card for payment:  
+    `4242 4242 4242 4242`
 
 
