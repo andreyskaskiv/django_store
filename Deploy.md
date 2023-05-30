@@ -20,7 +20,7 @@
 13. <a href="#celery">Celery</a>
 14. <a href="#firewall">Firewall</a>
 15. <a href="#domain_name">Domain name</a>
-16. <a href="#certbot">Certbot</a>
+16. <a href="#certbot">SSL certificates, Certbot</a>
 17. <a href="#fixtures_media">Fixtures, Media</a>
 18. <a href="#email">Email</a>
 19. <a href="#oauth_git_hub">OAuth GitHub</a>
@@ -36,6 +36,9 @@ chmod 400 StoreCredentials.pem
 ssh -i "StoreCredentials.pem" ubuntu@ec2-52-28-221-249.eu-central-1.compute.amazonaws.com
 ```
 ---
+test card for payment:  
+`4242 4242 4242 4242`
+---
 **After project settings:**
 
 shell_plus:
@@ -50,6 +53,10 @@ nginx:
 ```text
 sudo systemctl restart nginx
 sudo nginx -t
+sudo systemctl status nginx
+```
+```text
+tail -f /var/log/nginx/access.log
 ```
 gunicorn:
 ```text
@@ -61,9 +68,25 @@ celery:
 sudo systemctl restart celery
 sudo systemctl status celery
 ```
-test card for payment:  
-`4242 4242 4242 4242`
-
+Server resolves:
+```text
+nslookup clothing-store.pp.ua
+```
+```text
+nslookup clothing-store.pp.ua 8.8.4.4 
+```
+Open ports:
+```text
+nmap clothing-store.pp.ua
+```
+```text
+telnet 52.28.221.249 80
+telnet clothing-store.pp.ua 80
+```
+Сheck that the domain name resolves to the correct IP address:
+```text
+dig clothing-store.pp.ua
+```
 
 ---
 ### 2. Update & Upgrade: <a name="update_upgrade"></a>
@@ -130,7 +153,7 @@ source venv/bin/activate
 ### 6. FileZilla: <a name="file_zilla"></a>
 
 ```text
-Transferring a project
+Transferring project files to the server
 ```
 
 ---
@@ -292,6 +315,7 @@ server {
     }
 }
 ```
+enable or disabled the file:
 ```text
 sudo ln -s /etc/nginx/sites-available/store /etc/nginx/sites-enabled
 ```
@@ -303,6 +327,24 @@ sudo systemctl restart nginx
 ```
 
 http://52.28.221.249
+
+Info:
+```text
+tail -f /var/log/nginx/access.log
+```
+```text
+tail -f /var/log/nginx/error.log
+```
+```text
+tail -f /var/log/nginx/*.log
+```
+What servers do we have running:
+```text
+sudo ls -l /etc/nginx/sites-enabled
+```
+
+
+
 
 
 ---
@@ -398,11 +440,11 @@ sudo ufw status
 ```
 
 ---
-### 15. Domain name: <a name="domain_name"></a>  - not working yet (:
+### 15. Domain name: <a name="domain_name"></a>
 
 * [Configure Nginx to Proxy Pass to Gunicorn](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-22-04#configure-nginx-to-proxy-pass-to-gunicorn)
 
-domain = REPTILIANS_RULE_THE_BALL.UA :)
+domain = clothing-store.pp.ua
 
 ```text
 sudo nano /etc/nginx/sites-available/store
@@ -410,7 +452,7 @@ sudo nano /etc/nginx/sites-available/store
 ```text
 server {
     listen 80;
-    server_name REPTILIANS_RULE_THE_BALL.UA;
+    server_name clothing-store.pp.ua;
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
@@ -437,7 +479,7 @@ sudo systemctl restart celery
 sudo systemctl status celery
 ```
 
-http://REPTILIANS_RULE_THE_BALL.UA - not working yet (:
+http://clothing-store.pp.ua
 
 
 ---
@@ -455,7 +497,7 @@ sudo snap install --classic certbot
 sudo ln -s /snap/bin/certbot /usr/bin/certbot
 ```
 ```text
-sudo certbot --nginx -d REPTILIANS_RULE_THE_BALL.UA
+sudo certbot --nginx -d clothing-store.pp.ua
 ```
 ```text
 sudo nano /etc/nginx/sites-available/store
@@ -482,7 +524,7 @@ sudo nano /etc/nginx/sites-available/store
 ```text
 server {
     listen 80;
-    server_name 52.28.221.249;
+    server_name clothing-store.pp.ua;
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
@@ -522,7 +564,7 @@ cd store-server/store/
 nano .env
 ```
 ```text
-DOMAIN_NAME=https://REPTILIANS_RULE_THE_BALL.UA
+DOMAIN_NAME=https://clothing-store.pp.ua
 ```
 ```text
 sudo systemctl restart gunicorn
@@ -542,41 +584,42 @@ sudo systemctl status celery
 * Development callback URL:  
     http://52.28.221.249/accounts/github/login/callback/  
     or  
-    https://REPTILIANS_RULE_THE_BALL.UA/accounts/github/login/callback/
+    https://clothing-store.pp.ua/accounts/github/login/callback/
 
 * Shell_plus:
 
-    ```text
-    cd store-server/store/
-    
-    source ../venv/bin/activate
-    
-    python manage.py shell_plus
-  
-    >>> Site.objects.all()
-    <QuerySet [<Site: github.com>]>
-  
-    >>> Site.objects.filter(domain="github.com").values('id')
-    <QuerySet [{'id': 1}]>
-    ```
+```text
+cd store-server/store/
+
+source ../venv/bin/activate
+
+python manage.py shell_plus
+
+>>> Site.objects.all()
+<QuerySet [<Site: github.com>]>
+
+>>> Site.objects.filter(domain="github.com").values('id')
+<QuerySet [{'id': 1}]>
+```
 
 * Admin panel (Select site to change): 
 
-    [SITE_ID](http://52.28.221.249/admin/sites/site/) - put PK github
+[SITE_ID](http://52.28.221.249/admin/sites/site/) - put PK github  
+[SITE_ID](https://clothing-store.pp.ua/admin/sites/site/) - put PK github
 
-    ```text
-    cd store
-    ```
-    ```text
-    nano settings.py
-    ```
-    ```
-    SITE_ID = 1
-    ```
+```text
+cd store
+```
+```text
+nano settings.py
+```
+```
+SITE_ID = 1
+```
   
 * Admin panel (Select social application to change): 
 
-    [Add social application](http://52.28.221.249/admin/socialaccount/socialapp/add/)
+[Add social application](https://clothing-store.pp.ua/admin/socialaccount/socialapp/add/)
 
 
 ---
@@ -585,24 +628,37 @@ sudo systemctl status celery
 * [Take webhooks live](https://stripe.com/docs/webhooks/go-live)
 * [webhooks](https://dashboard.stripe.com/webhooks)
 
-    ```text
-    cd store-server/store/
-    ```
-    ```text
-    nano .env
-    ```
-    ```text
-    STRIPE_WEBHOOK_SECRET=whsec_DPDxMqK7v7PDUAKEAwmu8XcCEGG8SmiN5i
-    ```
-    ```text
-    sudo systemctl restart gunicorn
-    sudo systemctl status gunicorn
-    ```
-    ```text
-    sudo systemctl restart celery
-    sudo systemctl status celery
-    ```
-    test card for payment:  
-    `4242 4242 4242 4242`
+Listen to Stripe events
+Endpoint URL:
+```text
+https://clothing-store.pp.ua/webhook/stripe/
+```
+Listen to:
+```text
+checkout.session.completed
+```
+Server
+```text
+cd store-server/store/
+```
+```text
+nano .env
+```
+```text
+STRIPE_WEBHOOK_SECRET=whsec_DPDxMqK7v9PDUAKEAwmu8XcCEGG8SmiN5i
+```
+```text
+sudo systemctl restart gunicorn
+sudo systemctl status gunicorn
+```
+```text
+sudo systemctl restart celery
+sudo systemctl status celery
+```
+Check `Stripe product price id`
+
+
+test card for payment:  
+`4242 4242 4242 4242`
 
 
