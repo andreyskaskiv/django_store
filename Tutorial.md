@@ -330,7 +330,7 @@ Create requirements.txt, .gitignore, Tutorial.md, .env
         C:\>stripe listen --forward-to 127.0.0.1:8000/webhook/stripe/
     
         Ready! You are using Stripe API Version [2022-11-15]. 
-        Your webhook signing secret is whsec_73899a70b0c3418c309e0a8e3512d872366d7c7ceeb52d77f5575c633da6318 (^C to quit)
+        Your webhook signing secret is whsec_673899a70b0c3418c309e0a8e3512d872366d7c7ceeb52d775c633da6318 (^C to quit)
         ```
         ```
         2023-03-12 22:55:38   --> charge.succeeded [evt_3MkvvZIJNrmkY0J21uUcE2Eu]
@@ -342,7 +342,7 @@ Create requirements.txt, .gitignore, Tutorial.md, .env
        Manjaro Linux:  
        ```python
         ./stripe listen --forward-to 127.0.0.1:8000/webhook/stripe/
-        > Ready! You are using Stripe API Version [2022-11-15]. Your webhook signing secret is whsec_673899a70b0c3418c309e0a8e3512d872366d7c7ceeb52d77f5575c633da6318 (^C to quit)
+        > Ready! You are using Stripe API Version [2022-11-15]. Your webhook signing secret is whsec_673899a70b0c3418c309e0a8e3512d872366d7c7ceeb52d775c633da6318 (^C to quit)
        ```
        ```
         2023-05-24 14:23:22   --> charge.succeeded [evt_3NBFmnIJNrmkY0J200oHU6Sa]

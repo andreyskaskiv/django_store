@@ -19,7 +19,9 @@
 ---
 
 
-<a href="Tutorial.md">Tutorial.md</a>
+* <a href="Tutorial.md">Tutorial.md</a>  
+* <a href="Deploy.md">Deploy.md</a>
+
 
 ---
 
